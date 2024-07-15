@@ -1,12 +1,38 @@
 <html>
     <head>
         <script src="https://telegram.org/js/telegram-web-app.js"></script>
+        <style>
+            body {
+                background-color: #1E1E1E;
+                max-width: 545px;
+            }
+            img {
+                width: 400px;
+            }
+            img.header {
+                position: fixed;
+                top: 0px;
+                left: 0px;
+
+            }
+            img.panel {
+                position: fixed;
+                bottom: 0px;
+                left: 0px;
+            }
+        </style>
     </head>
     <body>
-        <headers></headers>
+        <headers>
+        </headers>
         <main>
-            <img src="./пк.png">
-            <script>document.querySelector('img').width = window.innerWidth</script>
+            <img class='header' src="./header.png">
+            <img class='bets' src="./пк.png">
+            <img class='panel' src="./panel.png">
+            <script>
+            // document.querySelector('img').width = window.innerWidth;
+            document.querySelector('img.bets').style.padding = `${document.querySelector('img.header').height}px 0px ${document.querySelector('img.panel').height}px 0px`;
+            </script>
             <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/ZpCToSHY_jY?si=fh1s1LOf22O0o38d" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
         </main>
         <footer></footer>
