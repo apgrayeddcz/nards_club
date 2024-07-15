@@ -42,6 +42,7 @@
             <img class='bets' src="./bets.png">
             <img class='panel' src="./panel.png">
             <script>
+                document.querySelector('body').style.height = window.innerHeight;
                 document.querySelectorAll('img').forEach((img) => img.width = window.innerWidth);
                 document.querySelector('img.bets').style.padding = `${document.querySelector('img.header').height}px 0px ${document.querySelector('img.panel').height}px 0px`;
             </script>
