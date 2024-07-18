@@ -10,6 +10,7 @@ button {border: none; outline: none; }
 li{text-align: center;}
 body {
     background-color: #121212;
+    overflow: hidden;
 }
 
 headers {
