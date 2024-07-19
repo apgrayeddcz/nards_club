@@ -19,6 +19,36 @@ headers {
     width: 100%;
 }
 
+.cube svg {
+    width: 5.85vw;
+    height: 5.85vw;
+    border-radius: 1.45vw;
+}
+.cube svg rect {
+    fill: #FFFFFF;
+}
+.cube.blue svg {
+    background-color: #559CFF;
+}
+.cube.red svg {
+    background-color: #FF5959;
+}
+.cube.red.cube_history svg {
+    background-color: #AA5858;
+}
+.cube.blue.cube_history svg {
+    background-color: #5680BB;
+}
+.draw svg {
+    width: 9.17vw;
+    height: 3.3vw;
+}
+.coef {
+    font-family: "MontserratMedium";
+    font-size: 3.66vw;
+    color: #FFFFFF;
+}
+
 .stream {
     width: 100%;
 }
@@ -34,17 +64,21 @@ headers {
     width: 100%;
 }
 .stream img {
+    position: relative;
     width: 100%;
+    z-index: -2;
 }
 
 .history {
+    position: relative;
     width: calc(100% - 3.66vw - 3.66vw);
     height: 12vw;
     padding-left: 3.66vw;
     padding-right: 3.66vw;
     background-color: #1E1E1E;
-    border: 0.18vw solid #8C8C8C;
+    outline: 0.18vw solid #8C8C8C;
     border-radius: 3.66vw;
+    z-index: -1;
 }
 .history_wrapper {
     /* padding: 15 20 20 20; */
@@ -89,7 +123,7 @@ headers {
     height: 5.5vw;
     margin-top: -2.25vw;
     background-color: #1E1E1E;
-    border: 0.18vw solid #8C8C8C;
+    outline: 0.18vw solid #8C8C8C;
     border-radius: 3.66vw;
 }
 .status_line {
@@ -109,8 +143,9 @@ headers {
     padding-top: 2.56vw;
     padding-bottom: 3.48vw;
     background-color: #1E1E1E;
-    border: 0.18vw solid #8C8C8C;
+    outline: 0.18vw solid #8C8C8C;
     border-radius: 3.66vw 3.66vw 0 0;
+    border-width: 0.18vw 0px 0px 0px;
 
     display: flex;
     flex-flow: row wrap;
@@ -180,3 +215,75 @@ headers {
 .panel_buttons .panel_button:nth-last-child(-n + 1) {
     border-radius: 0 3.66vw 3.66vw 0;
 }
+
+
+.bets_list {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    gap: 3.66vw;
+    margin-top: calc(62.56vw + 1.83vw);
+}
+.bets_item {
+    width: calc(100% - 3.66vw - 3.66vw);
+    padding: 1.83vw 3.66vw 3.66vw 3.66vw;
+    background-color: #202020;
+    border-radius: 1.83vw;
+}
+.bets_item_title {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 2.75vw;
+    font-family: "MontserratMedium";
+    font-size: 2.75vw;
+    color: #FFFFFF;
+}
+
+.higher-number {
+}
+.higher-number_blocks {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 0.91vw;
+}
+.higher-number_list {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row nowrap;
+}
+.higher-number_list li {
+    width: 100%;
+    outline: 0.18vw solid #8C8C8C;
+    padding: 2.38vw 2.75vw 2.38vw 2.75vw;
+}
+.higher-number_list li:nth-child(1) {
+    border-radius: 1.83vw 0 0 1.83vw;
+}
+.higher-number_list li:nth-last-child(-n + 1) {
+    border-radius: 0 1.83vw 1.83vw 0;
+}
+.higher-number_item {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1E1E1E;
+}
+.higher-number_info {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 0.91vw;
+}
+.higher-number_info .cube svg{
+    width: 4.58vw;
+    height: 4.58vw;
+    border-radius: 0.73vw;
+}
+.higher-number_info_and svg {
+    width: 0.91vw;
+    height: 2.38vw;
+}
+
