@@ -6,17 +6,17 @@
 } 
 
 ul {list-style-type:  none;padding: 0;margin: 0;}
-button {border: none; outline: none; }
+button {border: none; outline: none; padding: 0;}
 li{text-align: center;}
 body {
     background-color: #121212;
-    overflow: hidden;
 }
 
 headers {
     top: 0;
     position: fixed;
     width: 100%;
+    overflow: hidden;
 }
 
 .cube svg {
@@ -134,6 +134,7 @@ headers {
 }
 
 .panel {
+    overflow: hidden;
     bottom: 0;
     position: fixed;
     width: calc(100% - 3.66vw - 3.66vw);
@@ -285,5 +286,42 @@ headers {
 .higher-number_info_and svg {
     width: 0.91vw;
     height: 2.38vw;
+}
+
+.exact-number_blocks {
+    display: flex;
+    flex-flow: column nowrap;
+}
+.exact-number_block {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+.exact-number_list {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.exact-number_block_blue svg {
+    background-color: #559CFF;
+}
+.exact-number_block-title .exact-number_block_blue svg {
+
+}
+.exact-number_block_red svg {
+    background-color: #FF5959;
+}
+.exact-number_item {
+    width: 9.35vw;
+    height: 9.35vw;
+    border-radius: 1.62vw;    
+}
+.exact-number_item.cube svg{
+    width: 9.35vw;
+    height: 9.35vw;
+    border-radius: 1.62vw;  
 }
 
