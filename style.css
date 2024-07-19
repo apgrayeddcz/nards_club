@@ -10,6 +10,7 @@ button {border: none; outline: none; padding: 0;}
 li{text-align: center;}
 body {
     background-color: #121212;
+    height: 80%;
 }
 
 headers {
