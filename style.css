@@ -3,14 +3,19 @@
     src: url("../fonts/Montserrat-Medium.ttf"); 
     font-style: 400; 
     font-weight: 500; 
+}
+@font-face {
+    font-family: "GeologicaBold"; 
+    src: url("../fonts/Geologica-Bold.ttf"); 
+    font-style: 400; 
+    font-weight: bold; 
 } 
 
 ul {list-style-type:  none;padding: 0;margin: 0;}
-button {border: none; outline: none; padding: 0;}
+button {border: none; outline: none; padding: 0;background:none}
 li{text-align: center;}
 body {
     background-color: #121212;
-    height: 80%;
 }
 
 headers {
@@ -293,9 +298,50 @@ headers {
     height: 2.38vw;
 }
 
+.bet-size {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "GeologicaBold";
+    font-size: 2.5vw;
+    color: #FFFFFF;
+    background-color: #1FBA6E;
+}
+.exact-number .bet-size {
+    position: absolute;
+    top: -2.2vw;
+    width: 9.33vw;
+    height: 4.56vw;
+    border-radius: 2.07vw;
+    box-shadow: 0px 0.36vw 0.73vw 0px rgba(0,0,0,0.5);
+}
+
+.exact-number_wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    gap: 2.93vw;
+}
+.exact-number_coef {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5.5vw;
+    width: 11vw;
+    border-radius: 1.83vw;
+    outline: 0.18vw solid #8C8C8C;
+    background-color: #202020;
+}
+.exact-number_coef_info {
+    font-family: "GeologicaBold";
+    font-size: 3.2vw;
+    color: #FFFFFF;   
+}
 .exact-number_blocks {
     display: flex;
     flex-flow: column nowrap;
+    gap: 3.66vw;
+    width: 100%;
 }
 .exact-number_block {
     display: flex;
@@ -309,24 +355,34 @@ headers {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin-left: 5.62vw;
 }
-.exact-number_block_blue svg {
-    background-color: #559CFF;
+.exact-number_block_blue .exact-number_block-title svg path.bcc {
+    fill: #559CFF;
 }
-.exact-number_block-title .exact-number_block_blue svg {
-
+.exact-number_block_red .exact-number_block-title svg path.bcc {
+    fill: #FF5959;
 }
-.exact-number_block_red svg {
-    background-color: #FF5959;
+.exact-number_block-title svg {
+    width: 7.51vw;
+    height: 6.1vw;
 }
 .exact-number_item {
+    position: relative;
     width: 9.35vw;
     height: 9.35vw;
-    border-radius: 1.62vw;    
 }
-.exact-number_item.cube svg{
-    width: 9.35vw;
-    height: 9.35vw;
-    border-radius: 1.62vw;  
+.exact-number_item svg {
+    height: 100%;
+    width: 100%;
+    outline: 0.18vw solid #8C8C8C;
+    background-color: #202020;
 }
-
+.exact-number_block_blue .exact-number_item.exact-number_item_active svg {
+    outline: none;
+    background-color: #559CFF;
+}
+.exact-number_block_red .exact-number_item.exact-number_item_active svg {
+    outline: none;
+    background-color: #FF5959;
+}
