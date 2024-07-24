@@ -198,7 +198,7 @@ headers {
     font-family: "MontserratMedium";
     font-size: 3.30vw;
     color: #FFFFFF;
-    width: 44.87vw;
+    width: auto;
     height: 12.85vw;
 }
 .panel_buttons {
