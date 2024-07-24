@@ -1,3 +1,11 @@
+/* z-index list */
+/* stream: -3 */
+/* stream img: -2 */
+/* history: -2 */
+/* history wrapper: -2 */
+/* bets_item: -3 */
+/* bets_item button: -4 */
+
 @font-face {
     font-family: "MontserratMedium"; 
     src: url("../fonts/Montserrat-Medium.ttf"); 
@@ -16,6 +24,9 @@ button {border: none; outline: none; padding: 0;background:none}
 li{text-align: center;}
 body {
     background-color: #121212;
+}
+main {
+    padding-bottom: 31vw;  /* Высота панели */
 }
 
 headers {
@@ -148,15 +159,12 @@ headers {
     bottom: 0;
     position: fixed;
     width: calc(100% - 3.66vw - 3.66vw);
-    padding-left: 3.66vw;
-    padding-right: 3.66vw;
     height: calc(31vw - 2.56vw - 3.38vw);
-    padding-top: 2.56vw;
-    padding-bottom: 3.48vw;
+    padding: 2.56vw 3.66vw 3.48vw 3.66vw;
     background-color: #1E1E1E;
     outline: 0.18vw solid #8C8C8C;
     border-radius: 3.66vw 3.66vw 0 0;
-    border-width: 0.18vw 0px 0px 0px;
+    border-width: 0.18vw 0 0 0;
 
     display: flex;
     flex-flow: row wrap;
@@ -236,10 +244,14 @@ headers {
     margin-top: calc(62.56vw + 1.83vw);
 }
 .bets_item {
+    z-index: -3;
     width: calc(100% - 3.66vw - 3.66vw);
     padding: 1.83vw 3.66vw 3.66vw 3.66vw;
     background-color: #202020;
     border-radius: 1.83vw;
+}
+.bets_item button{
+    z-index: -4;
 }
 .bets_item_title {
     padding: 0;
@@ -265,7 +277,6 @@ headers {
 .higher-number_list li {
     width: 100%;
     outline: 0.18vw solid #8C8C8C;
-    padding: 2.38vw 2.75vw 2.38vw 2.75vw;
 }
 .higher-number_list li:nth-child(1) {
     border-radius: 1.83vw 0 0 1.83vw;
@@ -280,6 +291,10 @@ headers {
     justify-content: space-between;
     align-items: center;
     background-color: #1E1E1E;
+    padding: 2.38vw 2.75vw 2.38vw 2.75vw;
+}
+.higher-number_item .higher-number_item_active {
+    padding-right: 1.83vw;
 }
 .higher-number_info {
     display: flex;
@@ -287,6 +302,10 @@ headers {
     flex-flow: row nowrap;
     align-items: center;
     gap: 0.91vw;
+    margin-right: auto;
+}
+.higher-number_coef {
+    margin-left: auto;
 }
 .higher-number_info .cube svg{
     width: 4.58vw;
@@ -313,7 +332,14 @@ headers {
     width: 9.33vw;
     height: 4.56vw;
     border-radius: 2.07vw;
-    box-shadow: 0px 0.36vw 0.73vw 0px rgba(0,0,0,0.5);
+    box-shadow: 0 0.36vw 0.73vw 0 rgba(0,0,0,0.5);
+}
+.higher-number .bet-size {
+    order: 2;
+    width: 7.52vw;
+    height: 4.03vw;
+    border-radius: 0.55vw;
+    margin-left: 0.91vw;
 }
 
 .exact-number_wrapper {
