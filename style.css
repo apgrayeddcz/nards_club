@@ -168,6 +168,7 @@ headers {
 
     display: flex;
     flex-flow: row wrap;
+    justify-content: space-around;
 }
 .panel_bet-size_list {
     font-family: 'MontserratMedium';
@@ -197,7 +198,7 @@ headers {
     font-family: "MontserratMedium";
     font-size: 3.30vw;
     color: #FFFFFF;
-    width: 46.05vw;
+    width: 46%;
     height: 12.85vw;
 }
 .panel_buttons {
