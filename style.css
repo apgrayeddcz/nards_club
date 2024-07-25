@@ -61,7 +61,8 @@ headers {
     height: 3.3vw;
 }
 .coef {
-    font-family: "MontserratMedium";
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
     font-size: 3.66vw;
     color: #FFFFFF;
 }
@@ -92,16 +93,19 @@ headers {
 .history {
     position: relative;
     background-color: #121212;
+    border-radius: 3.66vw;
     z-index: -2;
 }
 .history_wrapper {
     position: relative;
-    width: calc(100% - 3.66vw - 3.66vw);
+    width: calc(100% - 3.66vw - 3.66vw - 0.36vw);
     height: 12vw;
     padding-left: 3.66vw;
     padding-right: 3.66vw;
+    margin-left: auto;
+    margin-right: auto;
     background-color: #1E1E1E;
-    outline: 0.18vw solid #8C8C8C;
+    border: 0.18vw solid #8C8C8C;
     border-radius: 3.66vw;
     z-index: -1;
 }
@@ -144,7 +148,7 @@ headers {
     height: 5.5vw;
     margin-top: -2.25vw;
     background-color: #1E1E1E;
-    outline: 0.18vw solid #8C8C8C;
+    border: 0.18vw solid #8C8C8C;
     border-radius: 3.66vw;
 }
 .status_line {
@@ -171,7 +175,8 @@ headers {
     justify-content: space-between;
 }
 .panel_bet-size_list {
-    font-family: 'MontserratMedium';
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
     font-size: 3.66vw;
     text-align: center;
     color: #FFFFFF;
@@ -196,6 +201,7 @@ headers {
     align-items: center;
     flex-flow: column nowrap;
     font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
     font-size: 3vw;
     color: #FFFFFF;
     width: 40%;
@@ -258,7 +264,8 @@ headers {
     padding: 0;
     margin: 0;
     margin-bottom: 2.75vw;
-    font-family: "MontserratMedium";
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
     font-size: 2.75vw;
     color: #FFFFFF;
 }
@@ -322,7 +329,8 @@ headers {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: "GeologicaBold";
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
     font-size: 2.5vw;
     color: #FFFFFF;
     background-color: #1FBA6E;
@@ -360,7 +368,8 @@ headers {
     background-color: #202020;
 }
 .exact-number_coef_info {
-    font-family: "GeologicaBold";
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
     font-size: 3.2vw;
     color: #FFFFFF;   
 }
@@ -412,4 +421,52 @@ headers {
 .exact-number_block_red .exact-number_item.exact-number_item_active svg {
     outline: none;
     background-color: #FF5959;
+}
+
+.total-ml {
+
+}
+.total-ml_blocks {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+.total-ml_list {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2.20vw;
+    width: 100%;
+}
+.total-ml_item {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.total-ml_coef {
+    width: 39.26vw;
+    height: 10.45vw;
+    padding-left: 2.75vw;
+    padding-right: 2.75vw;
+    background-color: #121212;
+    outline: 0.18vw solid #8C8C8C;
+    border-radius: 1.83vw;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 3.66vw;
+    color: #FFFFFF;
+}
+.total-ml_total-value {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 3.66vw;
+    color: #FFFFFF;
 }
