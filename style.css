@@ -30,7 +30,7 @@ main {
 }
 
 headers {
-    position: sticky;
+    position: fixed;
     top: 0;
     width: 100%;
     overflow: hidden;
@@ -160,7 +160,7 @@ headers {
 
 .panel {
     overflow: hidden;
-    position: sticky;
+    position: fixed;
     bottom: 0;
     width: calc(100% - 3.66vw - 3.66vw);
     height: calc(31vw - 2.56vw - 3.38vw);
