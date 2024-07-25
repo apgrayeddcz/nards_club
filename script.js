@@ -1,3 +1,6 @@
 function addBet(b_type, b_id) {}
 
-document.querySelector('._js').textContent = window.innerHeight
+window.addEventListener('scroll', () => {
+    document.querySelector('._js').textContent = document.body.scrollTop
+}
+)
