@@ -5,6 +5,7 @@
 /* history wrapper: -2 */
 /* bets_item: -3 */
 /* bets_item button: -4 */
+/* panel 99999 */
 
 @font-face {
     font-family: "MontserratMedium"; 
@@ -173,6 +174,7 @@ headers {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
+    z-index: 99999;
 }
 .panel_bet-size_list {
     font-family: Arial, Helvetica, sans-serif;
