@@ -164,7 +164,7 @@ headers {
     position: fixed;
     bottom: 0;
     width: calc(100% - 3.66vw - 3.66vw);
-    height: calc(31vw - 2.56vw - 5.49vw);
+    height: calc(33vw - 2.56vw - 5.49vw);
     padding: 2.56vw 3.66vw 5.49vw 3.66vw;
     background-color: #1E1E1E;
     outline: 0.18vw solid #8C8C8C;
