@@ -1,9 +1,10 @@
 function addBet(b_type, b_id) {}
+function changeBetSize(s_id) {}
 
 const INNER_HEIGHT = window.innerHeight;
 
 window.addEventListener('scroll', () => {
-  document.querySelector('._js').textContent = `${26} ${document.body.scrollTop} ${window.innerHeight}`;
+  document.querySelector('._js').textContent = `${38} ${document.body.scrollTop} ${window.innerHeight}`;
   if (window.innerHeight < INNER_HEIGHT) {
     document.querySelector('headers').style.top = `${INNER_HEIGHT - window.innerHeight}px`;
     document.querySelector('.panel').style.bottom = `-${INNER_HEIGHT - window.innerHeight}px`;
