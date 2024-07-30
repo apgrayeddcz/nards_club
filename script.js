@@ -13,7 +13,7 @@ function checkListInStr(list, str) {
 
 
 window.addEventListener('onload', () => {
-  if (navigator.userAgent.indexOf('iPhone') > 0) {
+  if (navigator.userAgent.indexOf('iPhone') < 0) {
     const INNER_HEIGHT = window.innerHeight;
 
     const headers = document.querySelector('headers');
