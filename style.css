@@ -164,8 +164,8 @@ headers {
     position: fixed;
     bottom: 0;
     width: calc(100% - 3.66vw - 3.66vw);
-    height: calc(33vw - 2.56vw - 5.49vw);
-    padding: 2.56vw 3.66vw 5.49vw 3.66vw;
+    height: calc(31vw - 2.56vw - 3.66vw);
+    padding: 2.56vw 3.66vw 3.66vw 3.66vw;
     background-color: #1E1E1E;
     outline: 0.18vw solid #8C8C8C;
     border-radius: 3.66vw 3.66vw 0 0;
@@ -175,6 +175,7 @@ headers {
     flex-flow: row wrap;
     justify-content: space-between;
     z-index: 99999;
+    gap: 3.66vw;
 }
 .panel_bet-size_list {
     font-family: Arial, Helvetica, sans-serif;
@@ -196,6 +197,12 @@ headers {
     background-color: #1E1E1E;
     border: 0.18vw solid #8C8C8C;
     border-radius: 1.83vw;
+}
+.panel_list {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    width: 100%;
 }
 .panel_balance {
     display: flex;
