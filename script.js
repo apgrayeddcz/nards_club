@@ -38,7 +38,7 @@ if (checkListInStr(['iPhone','iPad','iPod'], navigator.userAgent)) {
       panel.style.bottom = 0;
       main.style.paddingBottom = `${main_pd_b}vw`;
     }
-    document.querySelector('._js').textContent = `${18} ${document.body.scrollTop} ${window.innerHeight} ${main.style.paddingBottom}`;
+    document.querySelector('._js').textContent = `${50} ${document.body.scrollTop} ${window.innerHeight} ${main.style.paddingBottom}`;
   
   })
 }
