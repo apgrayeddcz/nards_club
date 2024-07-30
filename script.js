@@ -12,6 +12,9 @@ function checkListInStr(list, str) {
   });
   return status
 }
+function convert_px_to_vw(px) {
+  return 100 * px / window.innerWidth;
+}
 
 if (checkListInStr(['iPhone','iPad','iPod'], navigator.userAgent)) {
   const INNER_HEIGHT = window.innerHeight;
@@ -28,7 +31,7 @@ if (checkListInStr(['iPhone','iPad','iPod'], navigator.userAgent)) {
     if (window.innerHeight < INNER_HEIGHT) {
       headers.style.top = `${INNER_HEIGHT - window.innerHeight}px`;
       panel.style.bottom = `-${INNER_HEIGHT - window.innerHeight}px`;
-      main.style.paddingBottom = `${main_pd_b - (INNER_HEIGHT - window.innerHeight)}vw`;
+      main.style.paddingBottom = `${main_pd_b - convert_px_to_vw(INNER_HEIGHT - window.innerHeight)}vw`;
     }
     else {
       headers.style.top = 0;
