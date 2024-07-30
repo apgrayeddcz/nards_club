@@ -20,7 +20,7 @@ window.addEventListener('onload', () => {
     const panel = document.querySelector('.panel');
     const main = document.querySelector('main');
 
-    panel.style.paddingBottom = `${6.66}vw`
+    // panel.style.paddingBottom = `${6.66}vw`
     window.addEventListener('scroll', () => {
       document.querySelector('._js').textContent = `${32} ${document.body.scrollTop} ${window.innerHeight}`;
       if (window.innerHeight < INNER_HEIGHT) {
