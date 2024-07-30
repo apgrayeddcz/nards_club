@@ -20,9 +20,8 @@ if (checkListInStr(['iPhone','iPad','iPod'], navigator.userAgent)) {
   const panel = document.querySelector('.panel');
   const main = document.querySelector('main');
 
-  panel.style.paddingBottom = `${6.66}vw`
+  panel.style.paddingBottom = `${9.66}vw`
   window.addEventListener('scroll', () => {
-    document.querySelector('._js').textContent = `${47} ${document.body.scrollTop} ${window.innerHeight}`;
     if (window.innerHeight < INNER_HEIGHT) {
       headers.style.top = `${INNER_HEIGHT - window.innerHeight}px`;
       panel.style.bottom = `-${INNER_HEIGHT - window.innerHeight}px`;
@@ -33,5 +32,7 @@ if (checkListInStr(['iPhone','iPad','iPod'], navigator.userAgent)) {
       panel.style.bottom = 0;
       main.style.paddingBottom = panel.style.height;
     }
+    document.querySelector('._js').textContent = `${47} ${document.body.scrollTop} ${window.innerHeight} ${main.style.paddingBottom}`;
+  
   })
 }
