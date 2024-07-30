@@ -22,7 +22,7 @@ window.addEventListener('onload', () => {
 
     panel.style.paddingBottom = `${6.66}vw`
     window.addEventListener('scroll', () => {
-      document.querySelector('._js').textContent = `${38} ${document.body.scrollTop} ${window.innerHeight}`;
+      document.querySelector('._js').textContent = `${32} ${document.body.scrollTop} ${window.innerHeight}`;
       if (window.innerHeight < INNER_HEIGHT) {
         headers.style.top = `${INNER_HEIGHT - window.innerHeight}px`;
         panel.style.bottom = `-${INNER_HEIGHT - window.innerHeight}px`;
