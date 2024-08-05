@@ -182,7 +182,6 @@ headers {
     font-weight: bold;
     font-size: 3.66vw;
     text-align: center;
-    color: #FFFFFF;
     width: 100%;
     display: flex;
     flex-flow: row nowrap;
@@ -194,9 +193,16 @@ headers {
     align-items: center;
     height: 8.25vw;
     width: 16.14vw;
+    color: #FFFFFF;
     background-color: #1E1E1E;
     border: 0.18vw solid #8C8C8C;
     border-radius: 1.83vw;
+}
+.panel_bet-size_element_active {
+    color: #1E1E1E;
+    background-color: #FFFFFF;
+    border: 0.18vw solid #FFFFFF;
+
 }
 .panel_list {
     display: flex;
@@ -260,14 +266,14 @@ headers {
     margin-top: calc(62.56vw + 1.83vw);
 }
 .bets_item {
-    z-index: -3;
+    /* z-index: -3; */
     width: calc(100% - 3.66vw - 3.66vw);
     padding: 1.83vw 3.66vw 3.66vw 3.66vw;
     background-color: #202020;
     border-radius: 1.83vw;
 }
 .bets_item button{
-    z-index: -4;
+    /* z-index: -4; */
 }
 .bets_item_title {
     padding: 0;
