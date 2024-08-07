@@ -1,33 +1,36 @@
+// var start = performance.now();
+// var end = performance.now();
+// console.log(end - start);
+
+
 let ACTIVE_BET_SIZE = 2
+let ACTIVE_BET_BUTTON = document.querySelectorAll('ul.panel_bet-size_list li')[ACTIVE_BET_SIZE]
 const bet_size_list = [10, 50, 100, 500, 1000]
-let bet_list = {}
-
-function addBet(e) {
-  const i = JSON.parse(e.dataset.info.replaceAll("'", '"'));
-  const b_button = document.querySelector(`button.${i['type']}_item[data-info="${e.dataset.info}"]`)
-  const b_size = b_button.querySelector('.bet-size')
-
-
-  if (i['type'] in bet_list && i['id'] in bet_list[i['type']]) {
-    bet_list[i['type']][i['id']] += bet_size_list[ACTIVE_BET_SIZE];
-  }
-  else if (i['type'] in bet_list && (!(i['id'] in bet_list[i['type']]))) {
-    bet_list[i['type']][i['id']] = bet_size_list[ACTIVE_BET_SIZE];
-  }
-  else if (!(i['type'] in bet_list)) {
-    bet_list[i['type']] = {};
-    bet_list[i['type']][i['id']] = bet_size_list[ACTIVE_BET_SIZE];
-  }
-  document.querySelectorAll(`button.${i['type']}_item_active`).forEach(elem => elem.classList.remove(`.${i['type']}_item_active`));
-  b_button.classList.add(`.${i['type']}_item_active`);
-  b_size.style.display = 'flex'
-  b_size.querySelector('span').textContent = bet_list[i['type']][i['id']]
+let bet_list = {
+  0: 0,
+  1: 0,
+  2: 0,
+  3: 0,
+  4: 0,
+  5: 0,
+  6: 0,
+  7: 0,
+  8: 0,
+  9: 0,
 }
 
-function changeBetSize(e) {
-  ACTIVE_BET_SIZE = Number(e.dataset.id);
-  document.querySelectorAll('.panel_bet-size_element_active').forEach(elem => elem.classList.remove('panel_bet-size_element_active'))
-  document.querySelector(`.panel_bet-size_element[data-id='${e.dataset.id}']`).classList.add('panel_bet-size_element_active')
+function addBet(e, id){
+  const b_size = e.querySelector('.bet-size');
+  if (bet_list[id] == 0) {e.classList.add(`active`);b_size.style.display = 'flex'} 
+  bet_list[id] += bet_size_list[ACTIVE_BET_SIZE];
+  b_size.querySelector('span').textContent = bet_list[id];
+}
+
+function changeBetSize(e, id) {
+  ACTIVE_BET_SIZE = id;
+  ACTIVE_BET_BUTTON.classList.remove('active');
+  ACTIVE_BET_BUTTON = e;
+  ACTIVE_BET_BUTTON.classList.add('active');
 }
 
 function checkListInStr(list, str) {
@@ -69,4 +72,4 @@ if (checkListInStr(['iPhone','iPad','iPod'], navigator.userAgent)) {
     }
   })
 }
-changeBetSize(document.querySelector(`.panel_bet-size_element[data-id='${ACTIVE_BET_SIZE}']`))
+changeBetSize(ACTIVE_BET_BUTTON)

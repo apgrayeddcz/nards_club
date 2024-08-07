@@ -198,7 +198,7 @@ headers {
     border: 0.18vw solid #8C8C8C;
     border-radius: 1.83vw;
 }
-.panel_bet-size_element_active {
+.panel_bet-size_element.active {
     color: #1E1E1E;
     background-color: #FFFFFF;
     border: 0.18vw solid #FFFFFF;
@@ -316,7 +316,7 @@ headers {
     background-color: #1E1E1E;
     padding: 2.38vw 2.75vw 2.38vw 2.75vw;
 }
-.higher-number_item .higher-number_item_active {
+.higher-number_item.active {
     padding-right: 1.83vw;
 }
 .higher-number_info {
@@ -341,7 +341,7 @@ headers {
 }
 
 .bet-size {
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     font-family: Arial, Helvetica, sans-serif;
@@ -429,11 +429,11 @@ headers {
     outline: 0.18vw solid #8C8C8C;
     background-color: #202020;
 }
-.exact-number_block_blue .exact-number_item.exact-number_item_active svg {
+.exact-number_block_blue.active svg {
     outline: none;
     background-color: #559CFF;
 }
-.exact-number_block_red .exact-number_item.exact-number_item_active svg {
+.exact-number_block_red.active svg {
     outline: none;
     background-color: #FF5959;
 }
