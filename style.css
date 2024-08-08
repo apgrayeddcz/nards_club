@@ -35,6 +35,7 @@ headers {
     top: 0;
     width: 100%;
     overflow: hidden;
+    z-index: 99999;
 }
 
 .cube svg {
@@ -72,7 +73,7 @@ headers {
     width: 100%;
     position: relative;
     background-color: #121212;
-    z-index: -3;
+    z-index: 1;
 }
 .stream_wrapper {
     width: 92vw;
@@ -88,14 +89,14 @@ headers {
 .stream img {
     position: relative;
     width: 100%;
-    z-index: -2;
+    z-index: 2;
 }
 
 .history {
     position: relative;
     background-color: #121212;
     border-radius: 3.66vw;
-    z-index: -2;
+    z-index: 99999;
 }
 .history_wrapper {
     position: relative;
@@ -151,6 +152,8 @@ headers {
     background-color: #1E1E1E;
     border: 0.18vw solid #8C8C8C;
     border-radius: 3.66vw;
+    position: relative;
+    z-index: 99999;
 }
 .status_line {
     height: 3.66vw;
@@ -429,11 +432,11 @@ headers {
     outline: 0.18vw solid #8C8C8C;
     background-color: #202020;
 }
-.exact-number_block_blue.active svg {
+.exact-number_block_blue .exact-number_item.active svg {
     outline: none;
     background-color: #559CFF;
 }
-.exact-number_block_red.active svg {
+.exact-number_block_red .exact-number_item.active svg {
     outline: none;
     background-color: #FF5959;
 }

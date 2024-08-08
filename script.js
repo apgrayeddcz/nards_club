@@ -17,11 +17,26 @@ let bet_list = {
   7: 0,
   8: 0,
   9: 0,
+  10: 0,
+  11: 0,
+  12: 0,
+  13: 0,
+  14: 0,
+  15: 0,
+  16: 0,
+  17: 0,
+  18: 0,
+  19: 0,
+  20: 0,
+  21: 0,
+  22: 0,
+  23: 0,
+  24: 0,
 }
 
 function addBet(e, id){
   const b_size = e.querySelector('.bet-size');
-  if (bet_list[id] == 0) {e.classList.add(`active`);b_size.style.display = 'flex'} 
+  if (bet_list[id] == 0) {e.classList.add(`active`);b_size.style.display = 'flex'};
   bet_list[id] += bet_size_list[ACTIVE_BET_SIZE];
   b_size.querySelector('span').textContent = bet_list[id];
 }
@@ -46,7 +61,6 @@ function checkListInStr(list, str) {
 function convert_px_to_vw(px) {
   return 100 * px / window.innerWidth;
 }
-
 // Адаптация айфона под баг телеги
 if (checkListInStr(['iPhone','iPad','iPod'], navigator.userAgent)) {
   const INNER_HEIGHT = window.innerHeight;
@@ -72,4 +86,4 @@ if (checkListInStr(['iPhone','iPad','iPod'], navigator.userAgent)) {
     }
   })
 }
-changeBetSize(ACTIVE_BET_BUTTON)
+changeBetSize(ACTIVE_BET_BUTTON, ACTIVE_BET_SIZE)

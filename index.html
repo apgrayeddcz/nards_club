@@ -104,7 +104,7 @@
                                     </button>
                                 </li>
                                 <li>
-                                    <button class="higher-number_item" type="button">
+                                    <button class="higher-number_item" type="button" onclick="addBet(this, 2)">
                                         <div class="higher-number_bet-size bet-size" style="display: none;"><span class="bet-size_info"></span></div>
                                         <div class="higher-number_info">
                                             <div class="cube red">
@@ -117,7 +117,7 @@
                             </ul>
                             <ul class="higher-number_block higher-number_list">
                                 <li>
-                                    <button class="higher-number_item" type="button">
+                                    <button class="higher-number_item" type="button" onclick="addBet(this, 3)">
                                         <div class="higher-number_bet-size bet-size" style="display: none;"><span class="bet-size_info"></span></div>
                                         <div class="higher-number_info">
                                             <div class="cube blue">
@@ -134,7 +134,7 @@
                                     </button>
                                 </li>
                                 <li>
-                                    <button class="higher-number_item" type="button">
+                                    <button class="higher-number_item" type="button" onclick="addBet(this, 4)">
                                         <div class="higher-number_bet-size bet-size" style="display: none;"><span class="bet-size_info"></span></div>
                                         <div class="higher-number_info">
                                             <div class="cube red">
@@ -182,35 +182,40 @@
                                 </div>
                                 <ul class="exact-number_list">
                                     <li>
-                                        <button class="exact-number_item cube">
-                                            <div class="higher-number_bet-size bet-size" style="display: none;"><span class="bet-size_info"></span></div>
+                                        <button class="exact-number_item cube" type="button" onclick="addBet(this, 5)">
+                                            <div class="exact-number_bet-size bet-size" style="display: none;"><span class="bet-size_info"></span></div>
                                             <svg data-v-f26afd4a="" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon">
                                                 <rect x="16.416" y="16.6913" width="8.61722" height="8.61722" rx="4.30861" fill="black"></rect>
                                             </svg>
                                         </button>
                                     </li>
                                     <li>
-                                        <button class="exact-number_item cube" onclick="addBet('exact_number', 2)">
+                                        <button class="exact-number_item cube" type="button" onclick="addBet(this, 6)">
+                                            <div class="exact-number_bet-size bet-size" style="display: none;"><span class="bet-size_info"></span></div>
                                             <svg data-v-f26afd4a="" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon"><rect x="5.21484" y="14.1063" width="8.61722" height="8.61722" rx="4.30861" transform="rotate(-90 5.21484 14.1063)" fill="black"></rect><rect x="27.6191" y="36.511" width="8.61722" height="8.61722" rx="4.30861" transform="rotate(-90 27.6191 36.511)" fill="black"></rect></svg>
                                         </button>
                                     </li>
                                     <li>
-                                        <button class="exact-number_item cube" onclick="addBet('exact_number', 3)">
+                                        <button class="exact-number_item cube" type="button" onclick="addBet(this, 7)">
+                                            <div class="exact-number_bet-size bet-size" style="display: none;"><span class="bet-size_info"></span></div>
                                             <svg data-v-f26afd4a="" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon"><rect x="16.416" y="25.3087" width="8.61722" height="8.61722" rx="4.30861" transform="rotate(-90 16.416 25.3087)" fill="black"></rect><rect x="5.21484" y="14.1063" width="8.61722" height="8.61722" rx="4.30861" transform="rotate(-90 5.21484 14.1063)" fill="black"></rect><rect x="27.6191" y="36.511" width="8.61722" height="8.61722" rx="4.30861" transform="rotate(-90 27.6191 36.511)" fill="black"></rect></svg>
                                         </button>
                                     </li>
                                     <li>
-                                        <button class="exact-number_item cube" onclick="addBet('exact_number', 4)">
+                                        <button class="exact-number_item cube" type="button" onclick="addBet(this, 8)">
+                                            <div class="exact-number_bet-size bet-size" style="display: none;"><span class="bet-size_info"></span></div>
                                             <svg data-v-f26afd4a="" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon"><rect x="5.21484" y="5.48895" width="8.61722" height="8.61722" rx="4.30861" fill="black"></rect><rect x="27.6191" y="5.48895" width="8.61722" height="8.61722" rx="4.30861" fill="black"></rect><rect x="5.21484" y="27.8937" width="8.61722" height="8.61722" rx="4.30861" fill="black"></rect><rect x="27.6191" y="27.8937" width="8.61722" height="8.61722" rx="4.30861" fill="black"></rect></svg>
                                         </button>
                                     </li>
                                     <li>
-                                        <button class="exact-number_item cube" onclick="addBet('exact_number', 5)">
+                                        <button class="exact-number_item cube" type="button" onclick="addBet(this, 9)">
+                                            <div class="exact-number_bet-size bet-size" style="display: none;"><span class="bet-size_info"></span></div>
                                             <svg data-v-f26afd4a="" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon"><rect x="5.21484" y="5.48895" width="8.61722" height="8.61722" rx="4.30861" fill="black"></rect><rect x="16.416" y="16.6913" width="8.61722" height="8.61722" rx="4.30861" fill="black"></rect><rect x="27.6191" y="5.48895" width="8.61722" height="8.61722" rx="4.30861" fill="black"></rect><rect x="5.21484" y="27.8937" width="8.61722" height="8.61722" rx="4.30861" fill="black"></rect><rect x="27.6191" y="27.8937" width="8.61722" height="8.61722" rx="4.30861" fill="black"></rect></svg>
                                         </button>
                                     </li>
                                     <li>
-                                        <button class="exact-number_item cube" onclick="addBet('exact_number', 6)">
+                                        <button class="exact-number_item cube" type="button" onclick="addBet(this, 10)">
+                                            <div class="exact-number_bet-size bet-size" style="display: none;"><span class="bet-size_info"></span></div>
                                             <svg data-v-f26afd4a="" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon"><rect x="5.21484" y="36.511" width="8.61722" height="8.61722" rx="4.30861" transform="rotate(-90 5.21484 36.511)" fill="black"></rect><rect x="5.21484" y="25.3087" width="8.61722" height="8.61722" rx="4.30861" transform="rotate(-90 5.21484 25.3087)" fill="black"></rect><rect x="5.21484" y="14.1063" width="8.61722" height="8.61722" rx="4.30861" transform="rotate(-90 5.21484 14.1063)" fill="black"></rect><rect x="27.6191" y="36.511" width="8.61722" height="8.61722" rx="4.30861" transform="rotate(-90 27.6191 36.511)" fill="black"></rect><rect x="27.6191" y="25.3087" width="8.61722" height="8.61722" rx="4.30861" transform="rotate(-90 27.6191 25.3087)" fill="black"></rect><rect x="27.6191" y="14.1063" width="8.61722" height="8.61722" rx="4.30861" transform="rotate(-90 27.6191 14.1063)" fill="black"></rect></svg>
                                         </button>
                                     </li>
@@ -237,37 +242,38 @@
                                 </div>
                                 <ul class="exact-number_list">
                                     <li>
-                                        <button class="exact-number_item cube" onclick="addBet('exact_number', 7)">
-                                            <div class="exact-number_bet-size bet-size">
-                                                <span class="bet-size_info">
-                                                    100
-                                                </span>
-                                            </div>
+                                        <button class="exact-number_item cube" type="button" onclick="addBet(this, 11)">
+                                            <div class="exact-number_bet-size bet-size"><span class="bet-size_info"></span></div>
                                             <svg data-v-f26afd4a="" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon"><rect x="16.416" y="16.6913" width="8.61722" height="8.61722" rx="4.30861" fill="black"></rect></svg>
                                         </button>
                                     </li>
                                     <li>
-                                        <button class="exact-number_item cube" onclick="addBet('exact_number', 8)">
+                                        <button class="exact-number_item cube" type="button" onclick="addBet(this, 12)">
+                                            <div class="exact-number_bet-size bet-size"><span class="bet-size_info"></span></div>
                                             <svg data-v-f26afd4a="" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon"><rect x="5.21484" y="14.1063" width="8.61722" height="8.61722" rx="4.30861" transform="rotate(-90 5.21484 14.1063)" fill="black"></rect><rect x="27.6191" y="36.511" width="8.61722" height="8.61722" rx="4.30861" transform="rotate(-90 27.6191 36.511)" fill="black"></rect></svg>
                                         </button>
                                     </li>
                                     <li>
-                                        <button class="exact-number_item cube" onclick="addBet('exact_number', 9)">
+                                        <button class="exact-number_item cube" type="button" onclick="addBet(this, 13)">
+                                            <div class="exact-number_bet-size bet-size"><span class="bet-size_info"></span></div>
                                             <svg data-v-f26afd4a="" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon"><rect x="16.416" y="25.3087" width="8.61722" height="8.61722" rx="4.30861" transform="rotate(-90 16.416 25.3087)" fill="black"></rect><rect x="5.21484" y="14.1063" width="8.61722" height="8.61722" rx="4.30861" transform="rotate(-90 5.21484 14.1063)" fill="black"></rect><rect x="27.6191" y="36.511" width="8.61722" height="8.61722" rx="4.30861" transform="rotate(-90 27.6191 36.511)" fill="black"></rect></svg>
                                         </button>
                                     </li>
                                     <li>
-                                        <button class="exact-number_item cube" onclick="addBet('exact_number', 10)">
+                                        <button class="exact-number_item cube" type="button" onclick="addBet(this, 14)">
+                                            <div class="exact-number_bet-size bet-size"><span class="bet-size_info"></span></div>
                                             <svg data-v-f26afd4a="" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon"><rect x="5.21484" y="5.48895" width="8.61722" height="8.61722" rx="4.30861" fill="black"></rect><rect x="27.6191" y="5.48895" width="8.61722" height="8.61722" rx="4.30861" fill="black"></rect><rect x="5.21484" y="27.8937" width="8.61722" height="8.61722" rx="4.30861" fill="black"></rect><rect x="27.6191" y="27.8937" width="8.61722" height="8.61722" rx="4.30861" fill="black"></rect></svg>
                                         </button>
                                     </li>
                                     <li>
-                                        <button class="exact-number_item cube" onclick="addBet('exact_number', 11)">
+                                        <button class="exact-number_item cube" type="button" onclick="addBet(this, 15)">
+                                            <div class="exact-number_bet-size bet-size"><span class="bet-size_info"></span></div>
                                             <svg data-v-f26afd4a="" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon"><rect x="5.21484" y="5.48895" width="8.61722" height="8.61722" rx="4.30861" fill="black"></rect><rect x="16.416" y="16.6913" width="8.61722" height="8.61722" rx="4.30861" fill="black"></rect><rect x="27.6191" y="5.48895" width="8.61722" height="8.61722" rx="4.30861" fill="black"></rect><rect x="5.21484" y="27.8937" width="8.61722" height="8.61722" rx="4.30861" fill="black"></rect><rect x="27.6191" y="27.8937" width="8.61722" height="8.61722" rx="4.30861" fill="black"></rect></svg>
                                         </button>
                                     </li>
                                     <li>
-                                        <button class="exact-number_item cube" onclick="addBet('exact_number', 12)">
+                                        <button class="exact-number_item cube" type="button" onclick="addBet(this, 16)">
+                                            <div class="exact-number_bet-size bet-size"><span class="bet-size_info"></span></div>
                                             <svg data-v-f26afd4a="" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon"><rect x="5.21484" y="36.511" width="8.61722" height="8.61722" rx="4.30861" transform="rotate(-90 5.21484 36.511)" fill="black"></rect><rect x="5.21484" y="25.3087" width="8.61722" height="8.61722" rx="4.30861" transform="rotate(-90 5.21484 25.3087)" fill="black"></rect><rect x="5.21484" y="14.1063" width="8.61722" height="8.61722" rx="4.30861" transform="rotate(-90 5.21484 14.1063)" fill="black"></rect><rect x="27.6191" y="36.511" width="8.61722" height="8.61722" rx="4.30861" transform="rotate(-90 27.6191 36.511)" fill="black"></rect><rect x="27.6191" y="25.3087" width="8.61722" height="8.61722" rx="4.30861" transform="rotate(-90 27.6191 25.3087)" fill="black"></rect><rect x="27.6191" y="14.1063" width="8.61722" height="8.61722" rx="4.30861" transform="rotate(-90 27.6191 14.1063)" fill="black"></rect></svg>
                                         </button>
                                     </li>
@@ -282,45 +288,53 @@
                         <div class="total-ml_blocks">
                             <ul class="total-ml_list">
                                 <li class="total-ml_item">
-                                    <button class="total-ml_coef">
+                                    <button class="total-ml_coef" type="button" onclick="addBet(this, 17)">
+                                        <div class="exact-number_bet-size bet-size"><span class="bet-size_info"></span></div>
                                         <span class="total-ml_coef_type">Бол.</span>
                                         <span class="total-ml_coef_value">3.42</span>
                                     </button>
                                     <span class="total-ml_total-value">4.5</span>
-                                    <button class="total-ml_coef">
+                                    <button class="total-ml_coef" type="button" onclick="addBet(this, 18)">
+                                        <div class="exact-number_bet-size bet-size"><span class="bet-size_info"></span></div>
                                         <span class="total-ml_coef_type">Мен.</span>
                                         <span class="total-ml_coef_value">3.42</span>
                                     </button>
                                 </li>
                                 <li class="total-ml_item">
-                                    <button class="total-ml_coef">
+                                    <button class="total-ml_coef" type="button" onclick="addBet(this, 19)">
+                                        <div class="exact-number_bet-size bet-size"><span class="bet-size_info"></span></div>
                                         <span class="total-ml_coef_type">Бол.</span>
                                         <span class="total-ml_coef_value">3.42</span>
                                     </button>
                                     <span class="total-ml_total-value">4.5</span>
-                                    <button class="total-ml_coef">
+                                    <button class="total-ml_coef" type="button" onclick="addBet(this, 20)">
+                                        <div class="exact-number_bet-size bet-size"><span class="bet-size_info"></span></div>
                                         <span class="total-ml_coef_type">Мен.</span>
                                         <span class="total-ml_coef_value">3.42</span>
                                     </button>
                                 </li>
                                 <li class="total-ml_item">
-                                    <button class="total-ml_coef">
+                                    <button class="total-ml_coef" type="button" onclick="addBet(this, 21)">
+                                        <div class="exact-number_bet-size bet-size"><span class="bet-size_info"></span></div>
                                         <span class="total-ml_coef_type">Бол.</span>
                                         <span class="total-ml_coef_value">3.42</span>
                                     </button>
                                     <span class="total-ml_total-value">4.5</span>
-                                    <button class="total-ml_coef">
+                                    <button class="total-ml_coef" type="button" onclick="addBet(this, 22)">
+                                        <div class="exact-number_bet-size bet-size"><span class="bet-size_info"></span></div>
                                         <span class="total-ml_coef_type">Мен.</span>
                                         <span class="total-ml_coef_value">3.42</span>
                                     </button>
                                 </li>
                                 <li class="total-ml_item">
-                                    <button class="total-ml_coef">
+                                    <button class="total-ml_coef" type="button" onclick="addBet(this, 23)">
+                                        <div class="exact-number_bet-size bet-size"><span class="bet-size_info"></span></div>
                                         <span class="total-ml_coef_type">Бол.</span>
                                         <span class="total-ml_coef_value">3.42</span>
                                     </button>
                                     <span class="total-ml_total-value">4.5</span>
-                                    <button class="total-ml_coef">
+                                    <button class="total-ml_coef" type="button" onclick="addBet(this, 24)">
+                                        <div class="exact-number_bet-size bet-size"><span class="bet-size_info"></span></div>
                                         <span class="total-ml_coef_type">Мен.</span>
                                         <span class="total-ml_coef_value">3.42</span>
                                     </button>
