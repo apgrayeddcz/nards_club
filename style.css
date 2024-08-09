@@ -408,7 +408,7 @@ headers {
     border-radius: 0.55vw;
     margin-left: 0.91vw;
 }
-.total-ml_bet-size {
+.total-ml .bet-size {
     order: 2;
     width: 7.52vw;
     height: 4.03vw;
@@ -513,9 +513,6 @@ headers {
     align-items: center;
     width: 100%;
 }
-.total-ml_item.active {
-    padding-right: 1.83vw;
-}
 .total-ml_coef {
     width: 39.26vw;
     height: 10.45vw;
@@ -533,6 +530,9 @@ headers {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
+}
+.total-ml_item.active {
+    padding-right: 1.83vw;
 }
 /* 121212 */
 .total-ml_info {

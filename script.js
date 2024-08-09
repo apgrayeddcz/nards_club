@@ -33,6 +33,7 @@ const BET_LIST_EMPTY = () => JSON.parse(JSON.stringify({
   24: 0,
 }));
 const bet_size_list = [10, 50, 100, 500, 1000];
+const colors = [10, 1e2, 250, 5e2, 1e3, 5e3, 1e4, 5e4, 1e6];
 
 let all_bets_history = [];
 let bets_history = [];
@@ -122,9 +123,6 @@ function convert_px_to_vw(px) {
   return 100 * px / window.innerWidth;
 }
 function nFormatter(num, digits) {
-  const colors = [
-    10, 1e2, 250, 5e2, 1e3, 5e3, 1e4, 5e4, 1e6
-  ]
   const lookup = [
     { value: 1, symbol: "" },
     { value: 1e3, symbol: "к" },
