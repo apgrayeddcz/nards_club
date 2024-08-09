@@ -53,8 +53,8 @@ function doublingBets() { //0.1
   if (bets_history.length) {
     for (let id in bet_list) {
       if (bet_list[id] > 0) {
-        bet_list[id] = bet_list[id] * 2;
-        const b_size = document.querySelector(`button[data-id="${id}"] .bet-size span`);
+        bet_list[id] = bet_list[id] * 2 > MAX_BET_SIZE ? MAX_BET_SIZE : bet_list[id] * 2;
+        const b_size = document.querySelector(`button[data-id="${id}"] .bet-size`);
         const [b_value_str, color_class] = nFormatter(bet_list[id], 2);
         b_size.querySelector('span').textContent = b_value_str;
         b_size.classList = `bet-size ${color_class}`;
@@ -67,7 +67,7 @@ function cancelAllBets() { //0.2
     bet_list = BET_LIST_EMPTY();
     document.querySelectorAll('button[data-id].active').forEach(e => {
       e.classList.remove('active'); 
-      e.querySelector('.bet-size') = 'none';
+      e.querySelector('.bet-size').style.display = 'none';
     })
   }
 }
@@ -82,14 +82,13 @@ function cancelLastBet() { //0.1
       i['e'].classList.remove(`active`);
       b_size.style.display = 'none';
     }else{
-      const [b_value_str, color_class] = nFormatter(bet_list[id], 2);
+      const [b_value_str, color_class] = nFormatter(bet_list[i['id']], 2);
       b_size.querySelector('span').textContent = b_value_str;
       b_size.classList = `bet-size ${color_class}`;
     };
   }
 }
 function addBet(e, id, value = false) {  // 0.2
-  var start = performance.now();
   const b_size = e.querySelector('.bet-size');
   if (bet_list[id] == 0) {e.classList.add(`active`);b_size.style.display = 'flex'};
   const b_value = value ? value : bet_size_list[ACTIVE_BET_SIZE];
@@ -99,8 +98,6 @@ function addBet(e, id, value = false) {  // 0.2
   const [b_value_str, color_class] = nFormatter(bet_list[id], 2);
   b_size.querySelector('span').textContent = b_value_str;
   b_size.classList = `bet-size ${color_class}`;
-  var end = performance.now();
-  console.log(end - start);
 }
 function changeBetSize(e, id) { //0
   ACTIVE_BET_SIZE = id;
@@ -134,7 +131,6 @@ function nFormatter(num, digits) {
   ];
   const regexp = /\.0+$|(?<=\.[0-9]*[1-9])0+$/;
   let item = lookup.findLast(item => num >= item.value);
-  console.log(colors.findLast(color => num >= color))
   return [
     item ? (num / item.value).toFixed(digits).replace(regexp, "").concat(item.symbol) : "0", 
     `bet-${colors.findLast(color => num >= color)}`
