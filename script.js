@@ -2,9 +2,7 @@
 // var end = performance.now();
 // console.log(end - start);
 
-// webView.getSettings().setUseWideViewPort(false);
-
-
+const MAX_BET_SIZE = 50000;
 let ACTIVE_BET_SIZE = 2;
 let ACTIVE_BET_SIZE_BUTTON = document.querySelectorAll('ul.panel_bet-size_list li')[ACTIVE_BET_SIZE];
 const BET_LIST_EMPTY = () => JSON.parse(JSON.stringify({
@@ -55,7 +53,7 @@ function doublingBets() { //0.1
     for (let id in bet_list) {
       if (bet_list[id] > 0) {
         bet_list[id] = bet_list[id] * 2;
-        document.querySelector(`button[data-id="${id}"] .bet-size span`).textContent = bet_list[id];
+        document.querySelector(`button[data-id="${id}"] .bet-size span`).textContent = nFormatter(bet_list[id], 2);
       } 
     }
   }
@@ -76,16 +74,22 @@ function cancelLastBet() { //0.1
     bet_list[i['id']] -= i['value']
 
     const b_size = i['e'].querySelector('.bet-size');
-    if (bet_list[i['id']] == 0) {i['e'].classList.remove(`active`);b_size.style.display = 'none';}else{b_size.querySelector('span').textContent = bet_list[i['id']];};
+    if (bet_list[i['id']] == 0) {i['e'].classList.remove(`active`);b_size.style.display = 'none';}else{b_size.querySelector('span').textContent = nFormatter(bet_list[i['id']], 2);};
   }
 }
-function addBet(e, id, value = false) {  // 0.1
+function addBet(e, id, value = false) {  // 0.2
+  var start = performance.now();
   const b_size = e.querySelector('.bet-size');
   if (bet_list[id] == 0) {e.classList.add(`active`);b_size.style.display = 'flex'};
   const b_value = value ? value : bet_size_list[ACTIVE_BET_SIZE];
+  if (bet_list[id] + b_value > MAX_BET_SIZE) {return}
   bet_list[id] += b_value;
   bets_history.push({'e': e, 'id': id, 'value': b_value});
-  b_size.querySelector('span').textContent = bet_list[id];
+  const [b_value_str, color_class] = nFormatter(bet_list[id], 2);
+  b_size.querySelector('span').textContent = b_value_str;
+  b_size.classList = `bet-size ${color_class}`;
+  var end = performance.now();
+  console.log(end - start);
 }
 function changeBetSize(e, id) { //0
   ACTIVE_BET_SIZE = id;
@@ -107,6 +111,28 @@ function checkListInStr(list, str) {
 function convert_px_to_vw(px) {
   return 100 * px / window.innerWidth;
 }
+function nFormatter(num, digits) {
+  const colors = [
+    10, 1e2, 250, 5e2, 1e3, 5e3, 1e4, 5e4, 1e6
+  ]
+  const lookup = [
+    { value: 1, symbol: "" },
+    { value: 1e3, symbol: "к" },
+    { value: 1e6, symbol: "млн" },
+    { value: 1e9, symbol: "млрд" },
+    { value: 1e12, symbol: "трлн" },
+    { value: 1e15, symbol: "квдр" },
+    { value: 1e18, symbol: "квнт" }
+  ];
+  const regexp = /\.0+$|(?<=\.[0-9]*[1-9])0+$/;
+  let item = lookup.findLast(item => num >= item.value);
+  console.log(colors.findLast(color => num >= color))
+  return [
+    item ? (num / item.value).toFixed(digits).replace(regexp, "").concat(item.symbol) : "0", 
+    `bet-${colors.findLast(color => num >= color)}`
+  ];
+}
+
 // Адаптация айфона под баг телеги
 if (checkListInStr(['iPhone','iPad','iPod'], navigator.userAgent)) {
   const INNER_HEIGHT = window.innerHeight;
