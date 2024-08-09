@@ -321,6 +321,7 @@ headers {
 }
 .higher-number_item.active {
     padding-right: 1.83vw;
+    /* background-color: #121212; */
 }
 .higher-number_info {
     display: flex;
@@ -476,7 +477,7 @@ headers {
     height: 10.45vw;
     padding-left: 2.75vw;
     padding-right: 2.75vw;
-    background-color: #121212;
+    background-color: #1E1E1E;
     outline: 0.18vw solid #8C8C8C;
     border-radius: 1.83vw;
 
@@ -489,6 +490,7 @@ headers {
     flex-flow: row nowrap;
     align-items: center;
 }
+/* 121212 */
 .total-ml_info {
     display: flex;
     justify-content: space-between;

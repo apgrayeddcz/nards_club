@@ -2,11 +2,12 @@
 // var end = performance.now();
 // console.log(end - start);
 
+// webView.getSettings().setUseWideViewPort(false);
 
-let ACTIVE_BET_SIZE = 2
-let ACTIVE_BET_BUTTON = document.querySelectorAll('ul.panel_bet-size_list li')[ACTIVE_BET_SIZE]
-const bet_size_list = [10, 50, 100, 500, 1000]
-let bet_list = {
+
+let ACTIVE_BET_SIZE = 2;
+let ACTIVE_BET_SIZE_BUTTON = document.querySelectorAll('ul.panel_bet-size_list li')[ACTIVE_BET_SIZE];
+const BET_LIST_EMPTY = () => JSON.parse(JSON.stringify({
   0: 0,
   1: 0,
   2: 0,
@@ -32,20 +33,58 @@ let bet_list = {
   22: 0,
   23: 0,
   24: 0,
-}
+}));
+const bet_size_list = [10, 50, 100, 500, 1000];
 
-function addBet(e, id){
+let bets_history = [];
+let last_bets = false;
+let bet_list = BET_LIST_EMPTY();
+
+function addLastBets() {
+  if (last_bets) {
+    for (let key in last_bets) {
+      if (last_bets[key] > 0) {
+        addBet(document.querySelector(`button[data-id="${key}"]`), key, last_bets[key])
+      }
+    }
+  }
+}
+function cancelAllBets() { //0.2
+  var start = performance.now();
+  if (bets_history.length) {
+    bet_list = BET_LIST_EMPTY();
+    document.querySelectorAll('button[data-id].active').forEach(e => {
+      e.classList.remove('active'); 
+      const b_size = e.querySelector('.bet-size');
+      b_size.style.display = 'none';
+    })
+  }
+  var end = performance.now();
+  console.log(end - start);
+}
+function cancelLastBet() { //0.1
+  if (bets_history.length) {
+    const i = bets_history.at(-1)
+    bets_history.pop()
+    bet_list[i['id']] -= i['value']
+
+    const b_size = i['e'].querySelector('.bet-size');
+    if (bet_list[i['id']] == 0) {i['e'].classList.remove(`active`);b_size.style.display = 'none';}else{b_size.querySelector('span').textContent = bet_list[i['id']];};
+  }
+}
+function addBet(e, id, value = false) {  // 0.1
   const b_size = e.querySelector('.bet-size');
   if (bet_list[id] == 0) {e.classList.add(`active`);b_size.style.display = 'flex'};
-  bet_list[id] += bet_size_list[ACTIVE_BET_SIZE];
+  const b_value = value ? value : bet_size_list[ACTIVE_BET_SIZE];
+  bet_list[id] += b_value;
+  bets_history.push({'e': e, 'id': id, 'value': b_value});
   b_size.querySelector('span').textContent = bet_list[id];
 }
-
-function changeBetSize(e, id) {
+function changeBetSize(e, id) { //0
   ACTIVE_BET_SIZE = id;
-  ACTIVE_BET_BUTTON.classList.remove('active');
-  ACTIVE_BET_BUTTON = e;
-  ACTIVE_BET_BUTTON.classList.add('active');
+  ACTIVE_BET_SIZE_BUTTON.classList.remove('active');
+  ACTIVE_BET_SIZE_BUTTON = e;
+  ACTIVE_BET_SIZE_BUTTON.classList.add('active');
 }
 
 function checkListInStr(list, str) {
@@ -86,4 +125,4 @@ if (checkListInStr(['iPhone','iPad','iPod'], navigator.userAgent)) {
     }
   })
 }
-changeBetSize(ACTIVE_BET_BUTTON, ACTIVE_BET_SIZE)
+changeBetSize(ACTIVE_BET_SIZE_BUTTON, ACTIVE_BET_SIZE)
