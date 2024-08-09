@@ -191,6 +191,7 @@ headers {
     justify-content: space-between;
 }
 .panel_bet-size_element {
+    touch-action: manipulation;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -232,6 +233,7 @@ headers {
     height: 12.85vw;
 }
 .panel_button {
+    touch-action: manipulation;
     width: 50%;
     background-color: #1E1E1E;
     border: 0.18vw solid #8C8C8C;
@@ -311,6 +313,7 @@ headers {
     border-radius: 0 1.83vw 1.83vw 0;
 }
 .higher-number_item {
+    touch-action: manipulation;
     width: 100%;
     display: flex;
     flex-flow: row nowrap;
@@ -430,6 +433,7 @@ headers {
     height: 6.1vw;
 }
 .exact-number_item {
+    touch-action: manipulation;
     position: relative;
     width: 9.35vw;
     height: 9.35vw;
