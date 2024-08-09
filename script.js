@@ -53,7 +53,10 @@ function doublingBets() { //0.1
     for (let id in bet_list) {
       if (bet_list[id] > 0) {
         bet_list[id] = bet_list[id] * 2;
-        document.querySelector(`button[data-id="${id}"] .bet-size span`).textContent = nFormatter(bet_list[id], 2);
+        const b_size = document.querySelector(`button[data-id="${id}"] .bet-size span`);
+        const [b_value_str, color_class] = nFormatter(bet_list[id], 2);
+        b_size.querySelector('span').textContent = b_value_str;
+        b_size.classList = `bet-size ${color_class}`;
       } 
     }
   }
@@ -74,7 +77,14 @@ function cancelLastBet() { //0.1
     bet_list[i['id']] -= i['value']
 
     const b_size = i['e'].querySelector('.bet-size');
-    if (bet_list[i['id']] == 0) {i['e'].classList.remove(`active`);b_size.style.display = 'none';}else{b_size.querySelector('span').textContent = nFormatter(bet_list[i['id']], 2);};
+    if (bet_list[i['id']] == 0) {
+      i['e'].classList.remove(`active`);
+      b_size.style.display = 'none';
+    }else{
+      const [b_value_str, color_class] = nFormatter(bet_list[id], 2);
+      b_size.querySelector('span').textContent = b_value_str;
+      b_size.classList = `bet-size ${color_class}`;
+    };
   }
 }
 function addBet(e, id, value = false) {  // 0.2
