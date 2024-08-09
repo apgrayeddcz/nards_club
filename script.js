@@ -36,6 +36,7 @@ const BET_LIST_EMPTY = () => JSON.parse(JSON.stringify({
 }));
 const bet_size_list = [10, 50, 100, 500, 1000];
 
+let all_bets_history = [];
 let bets_history = [];
 let last_bets = false;
 let bet_list = BET_LIST_EMPTY();
@@ -49,18 +50,24 @@ function addLastBets() {
     }
   }
 }
+function doublingBets() { //0.1
+  if (bets_history.length) {
+    for (let id in bet_list) {
+      if (bet_list[id] > 0) {
+        bet_list[id] = bet_list[id] * 2;
+        document.querySelector(`button[data-id="${id}"] .bet-size span`).textContent = bet_list[id];
+      } 
+    }
+  }
+}
 function cancelAllBets() { //0.2
-  var start = performance.now();
   if (bets_history.length) {
     bet_list = BET_LIST_EMPTY();
     document.querySelectorAll('button[data-id].active').forEach(e => {
       e.classList.remove('active'); 
-      const b_size = e.querySelector('.bet-size');
-      b_size.style.display = 'none';
+      e.querySelector('.bet-size') = 'none';
     })
   }
-  var end = performance.now();
-  console.log(end - start);
 }
 function cancelLastBet() { //0.1
   if (bets_history.length) {

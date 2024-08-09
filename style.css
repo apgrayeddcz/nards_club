@@ -470,11 +470,15 @@ headers {
     width: 100%;
 }
 .total-ml_item {
+    touch-action: manipulation;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+}
+.total-ml_item.active {
+    padding-right: 1.83vw;
 }
 .total-ml_coef {
     width: 39.26vw;
