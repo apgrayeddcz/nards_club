@@ -354,6 +354,9 @@ headers {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-size: 2.5vw;
+
+    color: #000000;
+    background-color: white;
 }
 .bet-size.bet-10 {
     color: #000000;
@@ -386,8 +389,8 @@ headers {
 .bet-size.bet-50000 {
     color: rgb(255, 255, 255);
     background-color: #dbba00;
-    /* background-color: #00baaf; */
 }
+    /* background-color: #00baaf; */
 /* .bet-size.bet-100000 {
     color: rgb(255, 255, 255);
     background-color: #ad914a;
@@ -410,7 +413,7 @@ headers {
 }
 .total-ml .bet-size {
     order: 2;
-    width: 7.52vw;
+    width: 12vw;
     height: 4.03vw;
     border-radius: 0.55vw;
     margin-left: 0.91vw;
@@ -531,10 +534,37 @@ headers {
     flex-flow: row nowrap;
     align-items: center;
 }
-.total-ml_item.active {
+.total-ml_coef.active {
+    box-shadow: inset rgba(0,0,0,0.5) 0px 0px 0.95vw 0.57vw; 
     padding-right: 1.83vw;
 }
-/* 121212 */
+.total-ml_coef.active.bet-10 {
+    background-color: #565656;   
+}
+.total-ml_coef.active.bet-100 {
+    background-color: #544B40;   
+}
+.total-ml_coef.active.bet-250 {
+    background-color: #583500;   
+}
+.total-ml_coef.active.bet-500 {
+    background-color: #00524D;   
+    /* outline: 0.18vw solid #25b872; */
+}
+.total-ml_coef.active.bet-1000 {
+    background-color: #112453;   
+}
+.total-ml_coef.active.bet-5000 {
+    background-color: #421057;   
+}
+.total-ml_coef.active.bet-10000 {
+    background-color: #550029;   
+}
+.total-ml_coef.active.bet-50000 {
+    background-color: #574A00;   
+}
+
+
 .total-ml_info {
     display: flex;
     justify-content: space-between;

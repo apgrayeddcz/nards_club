@@ -97,7 +97,9 @@ function addBet(e, id, value = false) {  // 0.2
   bets_history.push({'e': e, 'id': id, 'value': b_value});
   const [b_value_str, color_class] = nFormatter(bet_list[id], 2);
   b_size.querySelector('span').textContent = b_value_str;
-  b_size.classList = `bet-size ${color_class}`;
+  console.log(Array.from(e.classList).slice(-1))
+  if (e.classList.length == 3) {e.classList.replace(Array.from(e.classList).slice(-1), color_class)} else {e.classList.add(color_class)}
+  // b_size.classList = `bet-size ${color_class}`;
 }
 function changeBetSize(e, id) { //0
   ACTIVE_BET_SIZE = id;
