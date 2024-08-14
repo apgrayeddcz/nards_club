@@ -303,6 +303,7 @@ headers {
     flex-flow: row nowrap;
 }
 .higher-number_list li {
+    position: relative;
     width: 100%;
     outline: 0.18vw solid #8C8C8C;
 }
@@ -312,9 +313,16 @@ headers {
 .higher-number_list li:nth-last-child(-n + 1) {
     border-radius: 0 1.83vw 1.83vw 0;
 }
+.higher-number_list li:nth-child(1) .higher-number_item{
+    border-radius: 1.83vw 0 0 1.83vw;
+}
+.higher-number_list li:nth-last-child(-n + 1) .higher-number_item{
+    border-radius: 0 1.83vw 1.83vw 0;
+}
 .higher-number_item {
     touch-action: manipulation;
     width: 100%;
+    height: 100%;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
@@ -323,8 +331,34 @@ headers {
     padding: 2.38vw 2.75vw 2.38vw 2.75vw;
 }
 .higher-number_item.active {
+    box-shadow: inset rgba(0,0,0,0.5) 0px 0px 0.95vw 0.57vw; 
     padding-right: 1.83vw;
-    /* background-color: #121212; */
+    outline: 0.18vw solid white;
+}
+.higher-number_item.active.bet-10 {
+    background-color: #565656;   
+}
+.higher-number_item.active.bet-100 {
+    background-color: #544B40;   
+}
+.higher-number_item.active.bet-250 {
+    background-color: #583500;   
+}
+.higher-number_item.active.bet-500 {
+    background-color: #00524D;   
+    /* outline: 0.18vw solid #25b872; */
+}
+.higher-number_item.active.bet-1000 {
+    background-color: #112453;   
+}
+.higher-number_item.active.bet-5000 {
+    background-color: #421057;   
+}
+.higher-number_item.active.bet-10000 {
+    background-color: #550029;   
+}
+.higher-number_item.active.bet-50000 {
+    background-color: #574A00;   
 }
 .higher-number_info {
     display: flex;
@@ -357,6 +391,7 @@ headers {
 
     color: #000000;
     background-color: white;
+    box-shadow: 0 0.36vw 0.73vw 0 rgba(0,0,0,0.5);
 }
 .bet-size.bet-10 {
     color: #000000;
@@ -390,26 +425,66 @@ headers {
     color: rgb(255, 255, 255);
     background-color: #dbba00;
 }
+
+.exact-number .bet-10 .bet-size {
+    color: #000000;
+    background-color: #d9d9d9;
+}
+.exact-number .bet-100 .bet-size {
+    color: #000000;
+    background-color: #cabdad;
+}
+.exact-number .bet-250 .bet-size {
+    color: rgb(255, 255, 255);
+    background-color: #fc9801;
+}
+.exact-number .bet-500 .bet-size {
+    color: rgb(255, 255, 255);
+    background-color: #25b872;
+}
+.exact-number .bet-1000 .bet-size {
+    color: rgb(255, 255, 255);
+    background-color: #2057e3;
+}
+.exact-number .bet-5000 .bet-size {
+    color: rgb(255, 255, 255);
+    background-color: #a623da;
+}
+.exact-number .bet-10000 .bet-size {
+    color: rgb(255, 255, 255);
+    background-color: #ff4ba2;
+}
+.exact-number .bet-50000 .bet-size {
+    color: rgb(255, 255, 255);
+    background-color: #dbba00;
+}
     /* background-color: #00baaf; */
 /* .bet-size.bet-100000 {
     color: rgb(255, 255, 255);
     background-color: #ad914a;
 } */
 
-.exact-number .bet-size {
-    position: absolute;
-    top: -2.2vw;
-    width: 9.33vw;
-    height: 4.56vw;
-    border-radius: 2.07vw;
-    box-shadow: 0 0.36vw 0.73vw 0 rgba(0,0,0,0.5);
-}
 .higher-number .bet-size {
     order: 2;
     width: 7.52vw;
     height: 4.03vw;
     border-radius: 0.55vw;
     margin-left: 0.91vw;
+}
+.higher-number_list:nth-child(1) .higher-number_item .bet-size{
+    position: absolute;
+    top: -2.2vw;
+    left: calc(50% - 9.33vw/2);
+    width: 9.33vw;
+    height: 4.56vw;
+    border-radius: 2.07vw;
+}
+.exact-number .bet-size {
+    position: absolute;
+    top: -2.2vw;
+    width: 9.33vw;
+    height: 4.56vw;
+    border-radius: 2.07vw;
 }
 .total-ml .bet-size {
     order: 2;
@@ -537,6 +612,7 @@ headers {
 .total-ml_coef.active {
     box-shadow: inset rgba(0,0,0,0.5) 0px 0px 0.95vw 0.57vw; 
     padding-right: 1.83vw;
+    outline: 0.18vw solid white;
 }
 .total-ml_coef.active.bet-10 {
     background-color: #565656;   
