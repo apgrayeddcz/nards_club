@@ -379,6 +379,7 @@ headers {
     width: 4.58vw;
     height: 4.58vw;
     border-radius: 0.73vw;
+    box-shadow: 0 0.36vw 0.73vw 0 rgba(0,0,0,0.5);
 }
 .higher-number_info_and svg {
     width: 0.91vw;
