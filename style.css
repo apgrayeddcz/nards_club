@@ -305,6 +305,7 @@ headers {
 .higher-number_list li {
     position: relative;
     width: 100%;
+    height: 9.54vw;
 }
 .higher-number_list li:nth-child(1) {
     border-radius: 1.83vw 0 0 1.83vw;
