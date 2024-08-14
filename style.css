@@ -305,7 +305,6 @@ headers {
 .higher-number_list li {
     position: relative;
     width: 100%;
-    outline: 0.18vw solid #8C8C8C;
 }
 .higher-number_list li:nth-child(1) {
     border-radius: 1.83vw 0 0 1.83vw;
@@ -329,6 +328,7 @@ headers {
     align-items: center;
     background-color: #1E1E1E;
     padding: 2.38vw 2.75vw 2.38vw 2.75vw;
+    outline: 0.18vw solid #8C8C8C;
 }
 .higher-number_item.active {
     box-shadow: inset rgba(0,0,0,0.5) 0px 0px 0.95vw 0.57vw; 
