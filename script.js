@@ -54,10 +54,11 @@ function doublingBets() { //0.1
     for (let id in bet_list) {
       if (bet_list[id] > 0) {
         bet_list[id] = bet_list[id] * 2 > MAX_BET_SIZE ? MAX_BET_SIZE : bet_list[id] * 2;
-        const b_size = document.querySelector(`button[data-id="${id}"] .bet-size`);
+        const e = document.querySelector(`button[data-id="${id}"]`);
         const [b_value_str, color_class] = nFormatter(bet_list[id], 2);
-        b_size.querySelector('span').textContent = b_value_str;
-        b_size.classList = `bet-size ${color_class}`;
+        const color_class_old = Array.from(e.classList).find(c_name => c_name.includes('bet-'));
+        e.classList.replace(color_class_old, color_class)
+        e.querySelector('.bet-size span').textContent = b_value_str;
       } 
     }
   }
@@ -78,14 +79,14 @@ function cancelLastBet() { //0.1
     bets_history.pop()
     bet_list[i['id']] -= i['value']
 
-    const b_size = i['e'].querySelector('.bet-size');
     if (bet_list[i['id']] == 0) {
-      i['e'].classList.remove(`active`);
-      b_size.style.display = 'none';
+      i['e'].classList.remove('active');
+      i['e'].querySelector('.bet-size').style.display = 'none';
     }else{
       const [b_value_str, color_class] = nFormatter(bet_list[i['id']], 2);
-      b_size.querySelector('span').textContent = b_value_str;
-      b_size.classList = `bet-size ${color_class}`;
+      const color_class_old = Array.from(i['e'].classList).find(c_name => c_name.includes('bet-'));
+      i['e'].classList.replace(color_class_old, color_class)
+      i['e'].querySelector('.bet-size span').textContent = b_value_str;
     };
   }
 }
@@ -101,8 +102,6 @@ function addBet(e, id, value = false) {  // 0.2
   b_size.querySelector('span').textContent = b_value_str;
   const color_class_old = Array.from(e.classList).find(c_name => c_name.includes('bet-'));
   if (color_class_old !== undefined) {e.classList.replace(color_class_old, color_class)} else {e.classList.add(color_class)}
-  
-  // b_size.classList = `bet-size ${color_class}`;
 }
 function changeBetSize(e, id) { //0
   ACTIVE_BET_SIZE = id;
