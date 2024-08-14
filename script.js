@@ -65,6 +65,7 @@ function doublingBets() { //0.1
 function cancelAllBets() { //0.2
   if (bets_history.length) {
     bet_list = BET_LIST_EMPTY();
+    bets_history = [];
     document.querySelectorAll('button[data-id].active').forEach(e => {
       e.classList.remove('active'); 
       e.querySelector('.bet-size').style.display = 'none';
@@ -91,14 +92,16 @@ function cancelLastBet() { //0.1
 function addBet(e, id, value = false) {  // 0.2
   if (bet_list[id] == MAX_BET_SIZE) {return}
   const b_size = e.querySelector('.bet-size');
-  if (bet_list[id] == 0) {e.classList.add('active');b_size.style.display = 'flex'};
   const b_value = value ? value : bet_size_list[ACTIVE_BET_SIZE];
+
+  if (bet_list[id] == 0) {e.classList.add('active');b_size.style.display = 'flex';}
   bet_list[id] = bet_list[id] + b_value > MAX_BET_SIZE ? MAX_BET_SIZE : bet_list[id] + b_value;
   bets_history.push({'e': e, 'id': id, 'value': b_value});
   const [b_value_str, color_class] = nFormatter(bet_list[id], 2);
   b_size.querySelector('span').textContent = b_value_str;
-  const b_class = Array.from(e.classList);
-  if (b_class.join('').includes('bet-')) {e.classList.replace(b_class.slice(-1), color_class)} else {e.classList.add(color_class)}
+  const color_class_old = Array.from(e.classList).find(c_name => c_name.includes('bet-'));
+  if (color_class_old !== undefined) {e.classList.replace(color_class_old, color_class)} else {e.classList.add(color_class)}
+  
   // b_size.classList = `bet-size ${color_class}`;
 }
 function changeBetSize(e, id) { //0
