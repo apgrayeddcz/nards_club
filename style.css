@@ -333,7 +333,6 @@ headers {
 }
 .higher-number_item.active {
     box-shadow: inset rgba(0,0,0,0.5) 0px 0px 0.95vw 0.57vw; 
-    padding-right: 1.83vw;
     outline: 0.18vw solid white;
 }
 .higher-number_item.active.bet-10 {
