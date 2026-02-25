@@ -13,10 +13,11 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
+  width: 100vw;
+  height: 100vh;
 }
 
 .card {
-  
   background: white;
   border-radius: 16px;
   padding: 12px;
@@ -35,6 +36,18 @@ body {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain; /* или cover — зависит от задачи */
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.card.ready {
+  background: #A8E4A0;
+}
+.card.to_repairs {
+  background: #A5A5A5;
+}
+.card.cancel {
+  background: #ec5353;
 }
 
 .title {
@@ -112,4 +125,56 @@ body {
   font-weight: 600;
   cursor: pointer;
   box-shadow: 0 6px 20px rgba(255,77,79,0.4);
+}
+
+/* Спиннер */
+
+.spin-wrapper{
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  /* background: #080705; */
+
+  .spinner{
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    border: 3px solid transparent;
+    border-top-color: #595959;
+    top: 50%;
+    left: 50%;
+    margin: -30px;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+    
+    &:before, &:after{
+      content:'';
+      position: absolute;
+      border: 3px solid transparent;
+      border-radius: 50%;
+    }
+    
+    &:before{
+      border-top-color: #595959;
+      top: -12px;
+      left: -12px;
+      right: -12px;
+      bottom: -12px;
+      animation: spin 3s linear infinite;
+    }
+    
+    &:after{
+      border-top-color: #595959;
+      top: 6px;
+      left: 6px;
+      right: 6px;
+      bottom: 6px;  
+      animation: spin 4s linear infinite;
+    }
+  }
+}
+
+@keyframes spin{
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
 }
