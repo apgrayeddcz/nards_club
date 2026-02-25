@@ -1,6 +1,7 @@
 const params = new URLSearchParams(window.location.search);
 const user_token = params.get("token");
 const order_id = params.get("order_id");
+document.querySelector("h1").textContent = order_id
 
 card_html = `
     <div class="card">
