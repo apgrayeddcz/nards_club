@@ -580,27 +580,32 @@ async function main() {
   document.querySelector(".order-header span.time_in_work").textContent = convertTime(orders_info[order_id]["in_work"])
   generate_cards(products_array)
 
-  document.querySelector('.spin-wrapper').remove()
   // Запускаем интервал (например, каждые 10 секунд)
   setInterval(updateTimer, 10000);
-}
-
-// main();
-  document.querySelector("div.order-header div.order-id span.order_id").textContent = order_id
-  document.querySelector(".order-header a.order-phone").textContent = `+${orders_info[order_id]['phone_number']}`
-  document.querySelector(".order-header a.order-phone").href = `tel:+${orders_info[order_id]['phone_number']}`
-  document.querySelector(".order-header span.time_in_work").textContent = convertTime(orders_info[order_id]["in_work"])
-  generate_cards(products_array)
   document.querySelector('.finish-btn').addEventListener('click', function() {
     const data = collectOrderData();
     tg.sendData(data);   // отправляем боту
     tg.close();          // закрываем веб-приложение (опционально)
   });
-
   document.querySelector('.spin-wrapper').remove()
+}
 
-  // Запускаем интервал (например, каждые 10 секунд)
-  setInterval(updateTimer, 10000);
+main();
+  // document.querySelector("div.order-header div.order-id span.order_id").textContent = order_id
+  // document.querySelector(".order-header a.order-phone").textContent = `+${orders_info[order_id]['phone_number']}`
+  // document.querySelector(".order-header a.order-phone").href = `tel:+${orders_info[order_id]['phone_number']}`
+  // document.querySelector(".order-header span.time_in_work").textContent = convertTime(orders_info[order_id]["in_work"])
+  // generate_cards(products_array)
+  // document.querySelector('.finish-btn').addEventListener('click', function() {
+  //   const data = collectOrderData();
+  //   tg.sendData(data);   // отправляем боту
+  //   tg.close();          // закрываем веб-приложение (опционально)
+  // });
+
+  // document.querySelector('.spin-wrapper').remove()
+
+  // // Запускаем интервал (например, каждые 10 секунд)
+  // setInterval(updateTimer, 10000);
   
 
 // console.log(products_array)
