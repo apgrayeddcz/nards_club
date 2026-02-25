@@ -136,15 +136,15 @@ function change_card_status(article, status) {
   card = document.querySelector(`.card[data-id="${article}"]`)
   if (status == "READY") {
     if (card.classList.contains("ready")) {
-      card.classList.remove("ready")
+      card.className = "card"
     }
     else {
-      card.className = "card ready" 
+      card.className = "card ready"
     }
   }
   else if (status == "TO_REPAIRS") {
     if (card.classList.contains("to_repairs")) {
-      card.classList.remove("to_repairs")
+      card.className = "card"
     }
     else {
       card.className = "card to_repairs" 
@@ -152,10 +152,10 @@ function change_card_status(article, status) {
   }
   else if (status == "CANCEL") {
     if (card.classList.contains("cancel")) {
-      card.classList.remove("cancel")
+      card.className = "card"
     }
     else {
-      card.className = "card cancel" 
+      card.className = "card cancel"
     }
   }
   else {
