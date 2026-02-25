@@ -38,11 +38,21 @@ body {
 }
 
 .title {
+  margin-top: auto;
   font-size: 14px;
   font-weight: 600;
+  /* margin-bottom: 8px; */
+}
+.teh_name {
+  font-size: 12px;
+  font-weight: 600;
+  color: grey;
   margin-bottom: 8px;
 }
 
+.row_list {
+  margin-top: auto;
+}
 .row {
   display: flex;
   justify-content: space-between;
