@@ -1,8 +1,7 @@
 const params = new URLSearchParams(window.location.search);
-// const user_token = params.get("token");
-// const order_id = params.get("order_id");
-user_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNzcxODk2MDI3LCJleHAiOjE3NzQ0ODgwMjd9.n_LOA5qUpFtY7UIwFnCNq8LpZDjaLmVqS2-JrtQrijg"
-order_id = "1008"
+const user_token = params.get("token");
+const order_id = params.get("order_id");
+
 card_html = `
     <div class="card">
       <img data-nuxt-pic="" src="https://s3.ru1.storage.beget.cloud/3a14ed2c58b6-mechta/ЦР-1013324.webp" srcset="https://s3.ru1.storage.beget.cloud/3a14ed2c58b6-mechta/ЦР-1013324.webp 256w, https://s3.ru1.storage.beget.cloud/3a14ed2c58b6-mechta/ЦР-1013324.webp 512w">
