@@ -139,7 +139,7 @@ function change_card_status(article, status) {
       card.classList.remove("ready")
     }
     else {
-      card.classList.add("ready")
+      card.className = "card ready" 
     }
   }
   else if (status == "TO_REPAIRS") {
@@ -147,7 +147,7 @@ function change_card_status(article, status) {
       card.classList.remove("to_repairs")
     }
     else {
-      card.classList.add("to_repairs")
+      card.className = "card to_repairs" 
     }
   }
   else if (status == "CANCEL") {
@@ -155,7 +155,7 @@ function change_card_status(article, status) {
       card.classList.remove("cancel")
     }
     else {
-      card.classList.add("cancel")
+      card.className = "card cancel" 
     }
   }
   else {
