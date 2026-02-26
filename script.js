@@ -13,10 +13,10 @@ const order_id = params.get("order_id");
 // console.log(JSON.parse(localStorage.getItem('orders_in_sborke')))
 
 try {
-  localStorage.setItem('test', 'test');
+  localStorage.setItem('test', localStorage.getItem('orders_in_sborke') || "test");
   document.querySelector("h1").textContent = localStorage.getItem('test')
   // console.log('localStorage test:', localStorage.getItem('test'));
-  localStorage.removeItem('test');
+  // localStorage.removeItem('test');
 } catch (e) {
   document.querySelector("h1").textContent = '0'
   // console.error('localStorage недоступен:', e);
