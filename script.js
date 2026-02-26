@@ -318,8 +318,8 @@ function updateTimer() {
   document.querySelector(".order-header span.time_in_work").textContent = formatted;
 }
 
-function get_product_card_str(name, article, img, count, prcie, total_price, barcode, teh_name, type_units, status) {
-  return `<div class="card ${status}" data-id="${article}">
+function get_product_card_str(id, name, img, count, prcie, total_price, barcode, teh_name, type_units, status) {
+  return `<div class="card ${status}" data-id="${id}">
       <img data-nuxt-pic="" src="${img}" srcset="${img} 256w, ${img} 512w">
       <div class="title">
         ${name}
@@ -350,9 +350,9 @@ function get_product_card_str(name, article, img, count, prcie, total_price, bar
       </div>
 
       <div class="actions">
-        <button class="btn success" onclick='change_card_status("${article}", "READY")'>✅</button>
-        <button class="btn edit" onclick='change_card_status("${article}", "TO_REPAIRS")'>🔨</button>
-        <button class="btn danger" onclick='change_card_status("${article}", "CANCEL")'>❌</button>
+        <button class="btn success" onclick='change_card_status("${id}", "READY")'>✅</button>
+        <button class="btn edit" onclick='change_card_status("${id}", "TO_REPAIRS")'>🔨</button>
+        <button class="btn danger" onclick='change_card_status("${id}", "CANCEL")'>❌</button>
       </div>
     </div>
 `
@@ -505,8 +505,8 @@ function generate_cards(products_array) {
     product[1]["status"] = product[1]["article"] in orders_info[order_id]["products"] ? orders_info[order_id]["products"][product[1]["article"]]["status"] : product[1]["status"]
     orders_info[order_id]["products"][product[0]] = product[1]
     card_inner_html += get_product_card_str(
+      product[0],
       product[1]["name"],
-      product[1]["article"],
       product[1]["img"],
       product[1]["count"],
       product[1]["price"],
@@ -549,7 +549,7 @@ async function main() {
       category_id = category_info.results[0].id;
     }
     
-    products_not_filter[product_info["article"]] = {
+    products_not_filter[product_info["id"]] = {
       "status": "",
       "name": product_sale_info["name"],
       "article": product_info["article"],
