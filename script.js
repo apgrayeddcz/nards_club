@@ -1,6 +1,6 @@
 const tg = window.Telegram.WebApp;
-tg.expand();
-tg.ready();
+// tg.expand();
+// tg.ready();
 
 const params = new URLSearchParams(window.location.search);
 const user_token = params.get("user_token");
@@ -13,7 +13,7 @@ const order_id = params.get("order_id");
 // console.log(JSON.parse(localStorage.getItem('orders_in_sborke')))
 
 try {
-  localStorage.setItem('test', localStorage.getItem('orders_in_sborke') || "test");
+  localStorage.setItem('test', localStorage.getItem('test') || "test");
   document.querySelector("h1").textContent = localStorage.getItem('test')
   // console.log('localStorage test:', localStorage.getItem('test'));
   // localStorage.removeItem('test');
