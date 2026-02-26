@@ -1,26 +1,12 @@
 const tg = window.Telegram.WebApp;
-// tg.expand();
-// tg.ready();
+tg.expand();
+tg.ready();
 
 const params = new URLSearchParams(window.location.search);
 const user_token = params.get("user_token");
 const order_id = params.get("order_id");
 
-
-
-// localStorage.clear();
-
-// console.log(JSON.parse(localStorage.getItem('orders_in_sborke')))
-
-try {
-  localStorage.setItem('test', localStorage.getItem('test') || "test");
-  document.querySelector("h1").textContent = localStorage.getItem('test')
-  // console.log('localStorage test:', localStorage.getItem('test'));
-  // localStorage.removeItem('test');
-} catch (e) {
-  document.querySelector("h1").textContent = '0'
-  // console.error('localStorage недоступен:', e);
-}
+// localStorage.clear()
 
 let datetime = new Date();
 let datetime_today = new Date(
@@ -47,6 +33,7 @@ if (!(order_id in orders_info)) {
 }
 
 localStorage.setItem('orders_in_sborke', JSON.stringify(JSON.parse(JSON.stringify(orders_info))));
+console.log(JSON.parse(JSON.stringify(JSON.parse(JSON.stringify(orders_info)))))
 
 
 card_html = `
@@ -502,6 +489,7 @@ function change_card_status(article, status) {
   }
   orders_info[order_id]["products"][article]["status"] = product_status
   localStorage.setItem('orders_in_sborke', JSON.stringify(orders_info));
+  console.log(JSON.stringify(orders_info))
   if (allProductsHaveStatus()) {
     document.querySelector('.finish-btn').textContent = "Завершить подбор"
     document.querySelector('.finish-btn').disabled = false
@@ -516,7 +504,7 @@ function generate_cards(products_array) {
   }
   card_inner_html = ""
   for (const product of products_array) {
-    product[1]["status"] = product[1]["article"] in orders_info[order_id]["products"] ? orders_info[order_id]["products"][product[1]["article"]]["status"] : product[1]["status"]
+    product[1]["status"] = product[0] in orders_info[order_id]["products"] ? orders_info[order_id]["products"][product[0]]["status"] : product[1]["status"]
     orders_info[order_id]["products"][product[0]] = product[1]
     card_inner_html += get_product_card_str(
       product[0],
@@ -592,6 +580,7 @@ async function main() {
   document.querySelector(".order-header a.order-phone").href = `tel:+${orders_info[order_id]['phone_number']}`
   document.querySelector(".order-header span.time_in_work").textContent = convertTime(orders_info[order_id]["in_work"])
   generate_cards(products_array)
+  localStorage.setItem('orders_in_sborke', JSON.stringify(orders_info));
 
   // Запускаем интервал (например, каждые 10 секунд)
   setInterval(updateTimer, 10000);
