@@ -18,7 +18,7 @@ try {
   // console.log('localStorage test:', localStorage.getItem('test'));
   localStorage.removeItem('test');
 } catch (e) {
-  document.querySelector("h1").textContent = 0
+  document.querySelector("h1").textContent = '0'
   // console.error('localStorage недоступен:', e);
 }
 
