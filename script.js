@@ -5,7 +5,6 @@ tg.ready();
 const params = new URLSearchParams(window.location.search);
 const user_token = params.get("user_token");
 const order_id = params.get("order_id");
-
 // localStorage.clear()
 
 let datetime = new Date();
@@ -14,6 +13,27 @@ let datetime_today = new Date(
   datetime.getMonth(),
   datetime.getDate()
 );
+const CACHE_KEY = 'product_cache_v2';
+const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 часа в миллисекундах
+
+let productCache = JSON.parse(localStorage.getItem(CACHE_KEY)) || {};
+
+// Очистка устаревших записей (можно вызывать при старте)
+function cleanCache() {
+  const now = Date.now();
+  let changed = false;
+  for (const [id, entry] of Object.entries(productCache)) {
+    if (now - entry.timestamp > CACHE_TTL) {
+      delete productCache[id];
+      changed = true;
+    }
+  }
+  if (changed) {
+    localStorage.setItem(CACHE_KEY, JSON.stringify(productCache));
+  }
+}
+cleanCache();
+
 let orders_info = JSON.parse(localStorage.getItem('orders_in_sborke')) || {};
 for (let id in orders_info) {
   let order_datetime = new Date(orders_info[id]["datetime"]);
@@ -28,7 +48,7 @@ if (!(order_id in orders_info)) {
     "products": {},
     "datetime": datetime_today.toISOString(),
     "phone_number": "",
-    "in_work": 0,
+    "start_work_datetime": null,
   };
 }
 
@@ -298,11 +318,11 @@ function convertTime(seconds) {
     return '0м';
   }
 }
-function getSecondsInWork(order) {
+function getSecondsInWork(datetime_str) {
   // Если createdAt отсутствует или равен null, возвращаем 0
-  if (!order || !order.createdAt) return 0;
+  if (!datetime_str) return 0;
 
-  const created = new Date(order.createdAt);       // парсим дату создания (UTC)
+  const created = new Date(datetime_str);       // парсим дату создания (UTC)
   const now = new Date();                          // текущее локальное время
 
   const diffMs = now - created;                    // разница в миллисекундах
@@ -315,7 +335,8 @@ function getSecondsInWork(order) {
   return secondsInDay - 3600 * 3;
 }
 function updateTimer() {
-  const formatted = convertTime(orders_info[order_id]["in_work"]);
+  const seconds_in_work = getSecondsInWork(orders_info[order_id]["start_work_datetime"])
+  const formatted = convertTime(seconds_in_work);
   document.querySelector(".order-header span.time_in_work").textContent = formatted;
 }
 
@@ -443,8 +464,9 @@ function allProductsHaveStatus() {
   if (!order || !order.products) return false; // если нет заказа или продуктов
 
   const products = order.products;
-  for (let article in products) {
-    if (products[article].status === "") {
+  for (let id in products) {
+    if (products[id].status === "") {
+      console.log(id)
       return false; // нашли товар без статуса
     }
   }
@@ -493,6 +515,9 @@ function change_card_status(article, status) {
   if (allProductsHaveStatus()) {
     document.querySelector('.finish-btn').textContent = "Завершить подбор"
     document.querySelector('.finish-btn').disabled = false
+  } else {
+    document.querySelector('.finish-btn').textContent = "Нужно отметить все товары"
+    document.querySelector('.finish-btn').disabled = true
   }
 }
 function generate_cards(products_array) {
@@ -533,39 +558,91 @@ function collectOrderData() {
   
   return JSON.stringify(data);
 }
+async function getCachedData(key, fetchFn) {
+  const cached = productCache[key];
+  const now = Date.now();
+  if (cached && (now - cached.timestamp) < CACHE_TTL) {
+    return cached.data;
+  }
+  try {
+    const data = await fetchFn();
+    productCache[key] = { data, timestamp: now };
+    localStorage.setItem(CACHE_KEY, JSON.stringify(productCache));
+    return data;
+  } catch (error) {
+    console.error(`Ошибка загрузки ${key}:`, error);
+    // Если есть устаревшие данные, возвращаем их с предупреждением
+    if (cached) {
+      console.warn(`Используются устаревшие данные для ${key}`);
+      return cached.data;
+    }
+    throw error; // или обработать иначе
+  }
+}
+async function loadProductData(productSaleInfo) {
+  // Получаем product_id
+  const productIdResp = await request_get_product_id(productSaleInfo.id);
+  const productId = productIdResp.data.id;
+
+  // Параллельно запрашиваем информацию о товаре и категорию
+  const [productInfo, categoryResp] = await Promise.all([
+    getCachedData(`prod_${productId}`, () => request_get_product_info(productId)),
+    getCachedData(`cat_${productId}`, () => request_get_category_info(productId))
+  ]);
+
+  const categoryId = categoryResp.results.length > 0 ? categoryResp.results[0].id : -1;
+
+  return {
+    status: "",
+    name: productSaleInfo.name,
+    article: productInfo.article,
+    category_id: categoryId,
+    order: productInfo.order,
+    img: productInfo.images[0],
+    count: productSaleInfo.count,
+    price: productSaleInfo.price,
+    total_price: productSaleInfo.totalPrice,
+    barcode: productInfo.barcode,
+    teh_name: productInfo.technicalName,
+    base_units: productSaleInfo.baseUnits,
+  };
+}
 
 async function main() {
   const order_info = await request_get_order_info(order_id);
   products_not_filter = {}
-  phone_info = await request_get_phone_info(order_info["userId"])
-  orders_info[order_id]["phone_number"] = phone_info["phone"]
-  orders_info[order_id]["in_work"] = getSecondsInWork(order_info)
+  phonePromise = await request_get_phone_info(order_info["userId"])
+  orders_info[order_id]["start_work_datetime"] = order_info["createdAt"]
 
-  for (const product_sale_info of order_info.check.composition) {
-    product_id = await request_get_product_id(product_sale_info["id"])
-    product_id = product_id["data"]["id"]
-    product_info = await request_get_product_info(product_id)
-    category_info = await request_get_category_info(product_id)
-    category_id = -1
-    if (category_info.results.length > 0) {
-      category_id = category_info.results[0].id;
-    }
+  const product_promises = order_info.check.composition.map(item => loadProductData(item))
+  const products_promieses_done = await Promise.all(product_promises)
+  products_promieses_done.forEach(p => {products_not_filter[p.article] = p})
+
+  // for (const product_sale_info of order_info.check.composition) {
+  //   product_id = await request_get_product_id(product_sale_info["id"])
+  //   product_id = product_id["data"]["id"]
+  //   product_info = await request_get_product_info(product_id)
+  //   category_info = await request_get_category_info(product_id)
+  //   category_id = -1
+  //   if (category_info.results.length > 0) {
+  //     category_id = category_info.results[0].id;
+  //   }
     
-    products_not_filter[product_info["id"]] = {
-      "status": "",
-      "name": product_sale_info["name"],
-      "article": product_info["article"],
-      "category_id": category_id,
-      "order": product_info["order"],
-      "img": product_info["images"][0],
-      "count": product_sale_info["count"],
-      "price": product_sale_info["price"],
-      "total_price": product_sale_info["totalPrice"],
-      "barcode": product_info["barcode"],
-      "teh_name": product_info["technicalName"],
-      "base_units": product_sale_info["baseUnits"],
-    }
-  }
+  //   products_not_filter[product_info["id"]] = {
+  //     "status": "",
+  //     "name": product_sale_info["name"],
+  //     "article": product_info["article"],
+  //     "category_id": category_id,
+  //     "order": product_info["order"],
+  //     "img": product_info["images"][0],
+  //     "count": product_sale_info["count"],
+  //     "price": product_sale_info["price"],
+  //     "total_price": product_sale_info["totalPrice"],
+  //     "barcode": product_info["barcode"],
+  //     "teh_name": product_info["technicalName"],
+  //     "base_units": product_sale_info["baseUnits"],
+  //   }
+  // }
   
   const products_array = Object.entries(products_not_filter)
     .sort(([, a], [, b]) => {
@@ -573,8 +650,10 @@ async function main() {
         return b.category_id - a.category_id;
       }
       return a.order - b.order;
-    });
-  
+  });
+  console.log(products_array)
+  phone_info = await phonePromise
+  orders_info[order_id]["phone_number"] = phone_info["phone"]
   document.querySelector("div.order-header div.order-id span.order_id").textContent = order_id
   document.querySelector(".order-header a.order-phone").textContent = `+${orders_info[order_id]['phone_number']}`
   document.querySelector(".order-header a.order-phone").href = `tel:+${orders_info[order_id]['phone_number']}`
