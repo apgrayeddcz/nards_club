@@ -466,6 +466,7 @@ async function request_get_phone_info(buyer_id) {
 }
 
 function show_confirm_popup_ready(id, status, count) {
+  document.body.classList.add('modal-open');
   popup_html = `
 <div class="modal-overlay" id="overlay">
   <div class="modal-content">
@@ -488,7 +489,7 @@ function show_confirm_popup_ready(id, status, count) {
   });
 }
 function show_to_repairs_popup_ready(id, status, _) {
-
+  document.body.classList.add('modal-open');
   let checkboxesHtml = '';
   reasonsList.forEach((reason, _) => {
     checkboxesHtml += `
@@ -545,6 +546,7 @@ function check_repair_send_button() {
   }
 }
 function hide_popup() {
+  document.body.classList.remove('modal-open');
   document.getElementById("overlay").remove()
   // document.getElementById('overlay').style.display = 'none';
   // pending_id = null;
