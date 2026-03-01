@@ -594,6 +594,7 @@ async function loadProductData(productSaleInfo) {
 
   return {
     status: "",
+    id: productInfo.id,
     name: productSaleInfo.name,
     article: productInfo.article,
     category_id: categoryId,
@@ -616,7 +617,7 @@ async function main() {
 
   const product_promises = order_info.check.composition.map(item => loadProductData(item))
   const products_promieses_done = await Promise.all(product_promises)
-  products_promieses_done.forEach(p => {products_not_filter[p.article] = p})
+  products_promieses_done.forEach(p => {products_not_filter[p.id] = p})
 
   // for (const product_sale_info of order_info.check.composition) {
   //   product_id = await request_get_product_id(product_sale_info["id"])
