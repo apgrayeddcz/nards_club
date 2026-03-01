@@ -459,6 +459,99 @@ async function request_get_phone_info(buyer_id) {
     // console.error(error);
   }
 }
+
+function show_confirm_popup_ready(id, status, count) {
+  popup_html = `
+<div class="modal-overlay" id="overlay">
+  <div class="modal-content">
+    <p>Подтвердите количество</p>
+    <div class="modal-message">${count}</div>
+    <div class="modal-actions">
+      <button class="modal-btn modal-confirm" id="modalConfirmBtn" onclick="applyStatusChange('${id}', '${status}', ''); hide_popup();"
+      >Да, все верно</button>
+      <button class="modal-btn modal-cancel" id="modalCancelBtn" onclick = "hide_popup()">Отмена</button>
+    </div>
+  </div>
+</div>`
+  document.body.insertAdjacentHTML('beforeend', popup_html);
+  const overlay = document.querySelector(`#overlay`);
+  overlay.addEventListener('click', (event) => {
+    if (event.target === overlay) {
+      console.log(event.target)
+      hide_popup();
+    }
+  });
+}
+function show_to_repairs_popup_ready(id, status, _) {
+  const reasonsList = [
+    "Товар повреждён",
+    "Не тот товар",
+    "Истёк срок годности",
+    "Отсутствует на месте",
+    "Другое"
+  ];
+
+  let checkboxesHtml = '';
+  reasonsList.forEach((reason, _) => {
+    checkboxesHtml += `
+      <label style="display: block; margin-bottom: 8px;">
+        <input type="checkbox" value="${reason}" onclick="check_repair_send_button()"> ${reason}
+      </label>
+    `;
+  });
+
+  const popupHtml = `
+    <div class="modal-overlay" id="overlay">
+      <div class="modal-content">
+        <p>Укажите причину(ы)</p>
+        <div class="repair-list" style="text-align: left; margin: 20px 0;">
+          ${checkboxesHtml}
+        </div>
+        <div class="modal-actions">
+          <button class="modal-btn modal-confirm" id="repairConfirmBtn" disabled>Укажите причину</button>
+          <button class="modal-btn modal-cancel" id="repairCancelBtn" onclick = "hide_popup()">Отмена</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.insertAdjacentHTML('beforeend', popupHtml);
+
+  const confirmBtn = document.getElementById('repairConfirmBtn');
+  const overlay = document.querySelector(`#overlay`);
+  confirmBtn.addEventListener('click', () => {
+    const checkboxes = overlay.querySelectorAll('input[type="checkbox"]:checked');
+    const selectedReasons = Array.from(checkboxes).map(cb => cb.value);
+    if (selectedReasons.length === 0) {
+      // alert('Выберите хотя бы одну причину');
+      return;
+    }
+    applyStatusChange(id, status, { reasons: selectedReasons });
+    hide_popup();
+  });
+  overlay.addEventListener('click', (event) => {
+    if (event.target === overlay) {
+      console.log(event.target)
+      hide_popup();
+    }
+  });
+}
+function check_repair_send_button() {
+  if (document.querySelector(`.repair-list`).querySelector('input[type="checkbox"]:checked')) {
+    document.getElementById("repairConfirmBtn").disabled = false
+    document.getElementById("repairConfirmBtn").textContent = "Отправить на проверку"
+  }
+  else {
+    document.getElementById("repairConfirmBtn").disabled = true
+    document.getElementById("repairConfirmBtn").textContent = "Укажите причину"
+  }
+}
+function hide_popup() {
+  document.getElementById("overlay").remove()
+  // document.getElementById('overlay').style.display = 'none';
+  // pending_id = null;
+  // pending_status = null;
+}
 function allProductsHaveStatus() {
   const order = orders_info[order_id];
   if (!order || !order.products) return false; // если нет заказа или продуктов
@@ -466,59 +559,68 @@ function allProductsHaveStatus() {
   const products = order.products;
   for (let id in products) {
     if (products[id].status === "") {
-      console.log(id)
       return false; // нашли товар без статуса
     }
   }
   return true; // все товары имеют непустой статус
 }
-function change_card_status(article, status) {
-  product_status = ""
-  card = document.querySelector(`.card[data-id="${article}"]`)
+function applyStatusChange(id, status, info) {
+  let product_status = "";
+  const card = document.querySelector(`.card[data-id="${id}"]`);
+  
   if (status == "READY") {
     if (card.classList.contains("ready")) {
-      card.className = "card"
-      product_status = ""
+      card.className = "card";
+      product_status = "";
+    } else {
+      card.className = "card ready";
+      product_status = "READY";
     }
-    else {
-      card.className = "card ready"
-      product_status = "READY"
-    }
-  }
-  else if (status == "TO_REPAIRS") {
+  } else if (status == "TO_REPAIRS") {
     if (card.classList.contains("to_repairs")) {
-      card.className = "card"
-      product_status = ""
+      card.className = "card";
+      product_status = "";
+    } else {
+      card.className = "card to_repairs";
+      product_status = `TO_REPAIRS###${JSON.stringify(info)}`;
     }
-    else {
-      card.className = "card to_repairs" 
-      product_status = "TO_REPAIRS"
-    }
-  }
-  else if (status == "CANCEL") {
+  } else if (status == "CANCEL") {
     if (card.classList.contains("cancel")) {
-      card.className = "card"
-      product_status = ""
+      card.className = "card";
+      product_status = "";
+    } else {
+      card.className = "card cancel";
+      product_status = "CANCEL";
     }
-    else {
-      card.className = "card cancel"
-      product_status = "CANCEL"
-    }
-  }
-  else {
-    card.className = "card"
-    product_status = ""
-  }
-  orders_info[order_id]["products"][article]["status"] = product_status
-  localStorage.setItem('orders_in_sborke', JSON.stringify(orders_info));
-  console.log(JSON.stringify(orders_info))
-  if (allProductsHaveStatus()) {
-    document.querySelector('.finish-btn').textContent = "Завершить подбор"
-    document.querySelector('.finish-btn').disabled = false
   } else {
-    document.querySelector('.finish-btn').textContent = "Нужно отметить все товары"
-    document.querySelector('.finish-btn').disabled = true
+    card.className = "card";
+    product_status = "";
   }
+  
+  orders_info[order_id]["products"][id]["status"] = product_status;
+  localStorage.setItem('orders_in_sborke', JSON.stringify(orders_info));
+  
+  if (allProductsHaveStatus()) {
+    document.querySelector('.finish-btn').textContent = "Завершить подбор";
+    document.querySelector('.finish-btn').disabled = false;
+  } else {
+    document.querySelector('.finish-btn').textContent = "Нужно отметить все товары";
+    document.querySelector('.finish-btn').disabled = true;
+  }
+}
+function change_card_status(id, status) {
+  const card = document.querySelector(`.card[data-id="${id}"]`);
+  // Если это READY и количество товара > 1 — показываем подтверждение
+  if (status === "READY" && orders_info[order_id]["products"][id]["count"] > 1 && !card.classList.contains("ready")) {
+    show_confirm_popup_ready(id, status, orders_info[order_id]["products"][id]["count"]);
+    return; // не применяем статус сразу
+  }
+  if (status === "TO_REPAIRS" && !card.classList.contains("to_repairs")) {
+    show_to_repairs_popup_ready(id, status, '');
+    return; // не применяем статус сразу
+  }
+  // Иначе применяем сразу
+  applyStatusChange(id, status);
 }
 function generate_cards(products_array) {
   status_class_dict = {
@@ -552,8 +654,8 @@ function collectOrderData() {
     "id": order_id,
     "p": {}
   }
-  for (p_article in orders_info[order_id]["products"]) {
-    data["p"][p_article] = orders_info[order_id]["products"][p_article]["status"]
+  for (p_id in orders_info[order_id]["products"]) {
+    data["p"][p_id] = orders_info[order_id]["products"][p_id]["status"]
   }
   
   return JSON.stringify(data);
@@ -619,32 +721,6 @@ async function main() {
   const products_promieses_done = await Promise.all(product_promises)
   products_promieses_done.forEach(p => {products_not_filter[p.id] = p})
 
-  // for (const product_sale_info of order_info.check.composition) {
-  //   product_id = await request_get_product_id(product_sale_info["id"])
-  //   product_id = product_id["data"]["id"]
-  //   product_info = await request_get_product_info(product_id)
-  //   category_info = await request_get_category_info(product_id)
-  //   category_id = -1
-  //   if (category_info.results.length > 0) {
-  //     category_id = category_info.results[0].id;
-  //   }
-    
-  //   products_not_filter[product_info["id"]] = {
-  //     "status": "",
-  //     "name": product_sale_info["name"],
-  //     "article": product_info["article"],
-  //     "category_id": category_id,
-  //     "order": product_info["order"],
-  //     "img": product_info["images"][0],
-  //     "count": product_sale_info["count"],
-  //     "price": product_sale_info["price"],
-  //     "total_price": product_sale_info["totalPrice"],
-  //     "barcode": product_info["barcode"],
-  //     "teh_name": product_info["technicalName"],
-  //     "base_units": product_sale_info["baseUnits"],
-  //   }
-  // }
-  
   const products_array = Object.entries(products_not_filter)
     .sort(([, a], [, b]) => {
       if (a.category_id !== b.category_id) {
