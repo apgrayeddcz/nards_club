@@ -1,4 +1,9 @@
 const tg = window.Telegram.WebApp;
+const reasonsList = [
+  "Названия не соответствуют",
+  "Штрихкод не соответствует",
+  "Картинка не соответствует",
+];
 tg.expand();
 tg.ready();
 
@@ -483,13 +488,6 @@ function show_confirm_popup_ready(id, status, count) {
   });
 }
 function show_to_repairs_popup_ready(id, status, _) {
-  const reasonsList = [
-    "Товар повреждён",
-    "Не тот товар",
-    "Истёк срок годности",
-    "Отсутствует на месте",
-    "Другое"
-  ];
 
   let checkboxesHtml = '';
   reasonsList.forEach((reason, _) => {
