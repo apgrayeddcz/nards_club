@@ -4,6 +4,12 @@ const reasonsList = [
   "Штрихкод не соответствует",
   "Картинка не соответствует",
 ];
+const statuses_sbor_dict = {
+  "READY": "✅",
+  "TO_REPAIRS": "🔨",
+  "CANCEL": "❌",
+  "": "?",
+}
 tg.expand();
 tg.ready();
 
@@ -650,15 +656,32 @@ function generate_cards(products_array) {
 }
 
 function collectOrderData() {
-  data = {
+  let teh_data = {
     "id": order_id,
-    "p": {}
+    "type_data": "data",
+    "errors": [],
   }
-  for (p_id in orders_info[order_id]["products"]) {
-    data["p"][p_id] = orders_info[order_id]["products"][p_id]["status"]
+  let message_data = {
+    "type_message": "sborka_done",
+    "type_data": "message",
+    "message": "",
   }
-  
-  return JSON.stringify(data);
+
+  for (id in orders_info[order_id]["products"]) {
+    const p_info = orders_info[order_id]["products"][id]
+    const status = p_info["status"].split("###")[0]
+    message_data["message"] += `${statuses_sbor_dict[status]} ${p_info["name"]}\n`
+    message_data["message"] += ` Количество: ${p_info["base_units"] == "г" ? p_info["count"] / 1000 : p_info["count"]} x ${p_info["price"]}р\n`
+    message_data["message"] += ` Сумма: ${p_info["total_price"]}р`
+    if (status == "TO_REPAIRS") {
+      teh_data["errors"].push({
+        "id": id,
+        "error": JSON.parse(p_info["status"].split("###")[1]),
+      })
+    }
+  }
+  console.log(teh_data, message_data)
+  return [JSON.stringify(teh_data), JSON.stringify(message_data)]
 }
 async function getCachedData(key, fetchFn) {
   const cached = productCache[key];
@@ -728,7 +751,6 @@ async function main() {
       }
       return a.order - b.order;
   });
-  console.log(products_array)
   phone_info = await phonePromise
   orders_info[order_id]["phone_number"] = phone_info["phone"]
   document.querySelector("div.order-header div.order-id span.order_id").textContent = order_id
@@ -741,9 +763,10 @@ async function main() {
   // Запускаем интервал (например, каждые 10 секунд)
   setInterval(updateTimer, 10000);
   document.querySelector('.finish-btn').addEventListener('click', function() {
-    const data = collectOrderData();
-    tg.sendData(data);   // отправляем боту
-    tg.close();          // закрываем веб-приложение (опционально)
+    const [teh_data, message_data] = collectOrderData();
+    tg.sendData(teh_data);
+    tg.sendData(message_data);
+    tg.close();
   });
   document.querySelector('.spin-wrapper').remove()
 }
