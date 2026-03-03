@@ -685,6 +685,7 @@ function collectOrderData() {
     if (status == "TO_REPAIRS") {
       data["errors"].push({
         "id": id,
+        "article": p_info["article"],
         "error": JSON.parse(p_info["status"].split("###")[1]),
       })
     }
