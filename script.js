@@ -16,7 +16,7 @@ tg.ready();
 const params = new URLSearchParams(window.location.search);
 const user_token = params.get("user_token");
 const order_id = params.get("order_id");
-// localStorage.clear()
+localStorage.clear()
 
 let datetime = new Date();
 let datetime_today = new Date(
@@ -668,19 +668,19 @@ function collectOrderData() {
   // }
   let data = {
     "id": order_id,
-    "errors": "",
-    "message": "",
+    "errors": [],
+    // "message": "",
   }
 
   for (id in orders_info[order_id]["products"]) {
     const p_info = orders_info[order_id]["products"][id]
     const status = p_info["status"].split("###")[0]
-    // message_data["message"] += `${statuses_sbor_dict[status]} ${p_info["name"]}\n`
-    // message_data["message"] += ` Количество: ${p_info["base_units"] == "г" ? p_info["count"] / 1000 : p_info["count"]} x ${p_info["price"]}р\n`
-    // message_data["message"] += ` Сумма: ${p_info["total_price"]}р`
-    data["message"] += `${statuses_sbor_dict[status]} ${p_info["name"]}\n`
-    data["message"] += ` Количество: ${p_info["base_units"] == "г" ? p_info["count"] / 1000 : p_info["count"]} x ${p_info["price"]}р\n`
-    data["message"] += ` Сумма: ${p_info["total_price"]}р`
+    // // message_data["message"] += `${statuses_sbor_dict[status]} ${p_info["name"]}\n`
+    // // message_data["message"] += ` Количество: ${p_info["base_units"] == "г" ? p_info["count"] / 1000 : p_info["count"]} x ${p_info["price"]}р\n`
+    // // message_data["message"] += ` Сумма: ${p_info["total_price"]}р`
+    // data["message"] += `${statuses_sbor_dict[status]} ${p_info["name"]}\n`
+    // data["message"] += ` Количество: ${p_info["base_units"] == "г" ? p_info["count"] / 1000 : p_info["count"]} x ${p_info["price"]}р\n`
+    // data["message"] += ` Сумма: ${p_info["total_price"]}р`
 
     if (status == "TO_REPAIRS") {
       data["errors"].push({
