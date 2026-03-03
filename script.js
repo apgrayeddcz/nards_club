@@ -656,32 +656,43 @@ function generate_cards(products_array) {
 }
 
 function collectOrderData() {
-  let teh_data = {
+  // let teh_data = {
+  //   "id": order_id,
+  //   "type_data": "data",
+  //   "errors": [],
+  // }
+  // let message_data = {
+  //   "type_message": "sborka_done",
+  //   "type_data": "message",
+  //   "message": "",
+  // }
+  let data = {
     "id": order_id,
-    "type_data": "data",
-    "errors": [],
-  }
-  let message_data = {
-    "type_message": "sborka_done",
-    "type_data": "message",
+    "errors": "",
     "message": "",
   }
 
   for (id in orders_info[order_id]["products"]) {
     const p_info = orders_info[order_id]["products"][id]
     const status = p_info["status"].split("###")[0]
-    message_data["message"] += `${statuses_sbor_dict[status]} ${p_info["name"]}\n`
-    message_data["message"] += ` Количество: ${p_info["base_units"] == "г" ? p_info["count"] / 1000 : p_info["count"]} x ${p_info["price"]}р\n`
-    message_data["message"] += ` Сумма: ${p_info["total_price"]}р`
+    // message_data["message"] += `${statuses_sbor_dict[status]} ${p_info["name"]}\n`
+    // message_data["message"] += ` Количество: ${p_info["base_units"] == "г" ? p_info["count"] / 1000 : p_info["count"]} x ${p_info["price"]}р\n`
+    // message_data["message"] += ` Сумма: ${p_info["total_price"]}р`
+    data["message"] += `${statuses_sbor_dict[status]} ${p_info["name"]}\n`
+    data["message"] += ` Количество: ${p_info["base_units"] == "г" ? p_info["count"] / 1000 : p_info["count"]} x ${p_info["price"]}р\n`
+    data["message"] += ` Сумма: ${p_info["total_price"]}р`
+
     if (status == "TO_REPAIRS") {
-      teh_data["errors"].push({
+      data["errors"].push({
         "id": id,
         "error": JSON.parse(p_info["status"].split("###")[1]),
       })
     }
   }
-  console.log(teh_data, message_data)
-  return [JSON.stringify(teh_data), JSON.stringify(message_data)]
+  // console.log(teh_data, message_data)
+  // return [JSON.stringify(teh_data), JSON.stringify(message_data)]
+  console.log(data)
+  return JSON.stringify(data)
 }
 async function getCachedData(key, fetchFn) {
   const cached = productCache[key];
@@ -763,9 +774,8 @@ async function main() {
   // Запускаем интервал (например, каждые 10 секунд)
   setInterval(updateTimer, 10000);
   document.querySelector('.finish-btn').addEventListener('click', function() {
-    const [teh_data, message_data] = collectOrderData();
-    tg.sendData(teh_data);
-    tg.sendData(message_data);
+    const data = collectOrderData();
+    tg.sendData(data);
     tg.close();
   });
   document.querySelector('.spin-wrapper').remove()
