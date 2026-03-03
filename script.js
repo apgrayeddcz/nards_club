@@ -649,7 +649,7 @@ function generate_cards(products_array) {
       product[1]["barcode"],
       product[1]["teh_name"],
       product[1]["base_units"],
-      status_class_dict[product[1]["status"]],
+      status_class_dict[product[1]["status"].split('###')[0]],
     )
   }
   document.querySelector('div[class="cards_list"]').innerHTML = card_inner_html
