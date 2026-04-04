@@ -769,10 +769,11 @@ async function main() {
   document.querySelector(".order-header a.order-phone").textContent = `+${orders_info[order_id]['phone_number']}`
   // document.querySelector(".order-header a.order-phone").href = `tel:+${orders_info[order_id]['phone_number']}`
   document.querySelector(".order-header a.order-phone").href = '#'
-  document.querySelector(".order-header a.order-phone").addEventListener("click", (e) => {
+  document.querySelector(".order-header a.order-phone").onclick = async (e) => {
     e.preventDefault()
+    await navigator.clipboard.writeText(`+${orders_info[order_id]['phone_number']}`)
     window.location.href = `tel:+${orders_info[order_id]['phone_number']}`
-  })
+  }
   document.querySelector(".order-header span.time_in_work").textContent = convertTime(orders_info[order_id]["in_work"])
   generate_cards(products_array)
   localStorage.setItem('orders_in_sborke', JSON.stringify(orders_info));
